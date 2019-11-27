@@ -16,6 +16,7 @@ public class PasswordsList extends javax.swing.JFrame {
      */
     public PasswordsList() {
         initComponents();
+        
     }
 
     /**

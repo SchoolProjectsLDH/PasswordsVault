@@ -74,17 +74,21 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(InvalidPass);
         InvalidPass.setBounds(400, 190, 210, 43);
 
-        SubmitButton.setBackground(new java.awt.Color(2, 18, 41));
+        SubmitButton.setBackground(new java.awt.Color(0, 0, 0));
+        SubmitButton.setForeground(new java.awt.Color(255, 255, 255));
         SubmitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SubmitButton.png"))); // NOI18N
-        SubmitButton.setBorder(null);
+        SubmitButton.setText("Submit");
+        SubmitButton.setToolTipText("");
+        SubmitButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         SubmitButton.setBorderPainted(false);
+        SubmitButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         SubmitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SubmitButtonActionPerformed(evt);
             }
         });
         getContentPane().add(SubmitButton);
-        SubmitButton.setBounds(550, 330, 37, 40);
+        SubmitButton.setBounds(487, 320, 100, 50);
 
         PassLabel.setBackground(new java.awt.Color(0, 102, 204));
         PassLabel.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
@@ -96,6 +100,7 @@ public class Login extends javax.swing.JFrame {
         PassLabel.setBounds(0, 180, 210, 43);
 
         UsernameField.setBackground(new java.awt.Color(0, 0, 0));
+        UsernameField.setFont(new java.awt.Font("Lucida Grande", 1, 15)); // NOI18N
         UsernameField.setForeground(new java.awt.Color(255, 255, 255));
         UsernameField.setToolTipText("Username");
         UsernameField.setCaretColor(new java.awt.Color(255, 255, 255));
@@ -116,6 +121,7 @@ public class Login extends javax.swing.JFrame {
         UsernameLabel.setBounds(0, 120, 210, 43);
 
         PasswordField.setBackground(new java.awt.Color(0, 0, 0));
+        PasswordField.setFont(new java.awt.Font("Lucida Grande", 1, 15)); // NOI18N
         PasswordField.setForeground(new java.awt.Color(255, 255, 255));
         PasswordField.setToolTipText("Password");
         PasswordField.setCaretColor(new java.awt.Color(255, 255, 255));
@@ -132,6 +138,7 @@ public class Login extends javax.swing.JFrame {
         TwoFALabel.setBounds(0, 240, 210, 43);
 
         TwoFAField.setBackground(new java.awt.Color(0, 0, 0));
+        TwoFAField.setFont(new java.awt.Font("Lucida Grande", 1, 15)); // NOI18N
         TwoFAField.setForeground(new java.awt.Color(255, 255, 255));
         TwoFAField.setToolTipText("Username");
         TwoFAField.setCaretColor(new java.awt.Color(255, 255, 255));

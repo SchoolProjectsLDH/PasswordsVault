@@ -21,7 +21,7 @@ public class GoogleAuthMaker {
             String code = TimeBasedOneTimePasswordUtil.generateCurrentNumberString(lines[2]);
             return code;
         }catch(GeneralSecurityException e){
-            System.out.println("no");
+            System.out.println("Err");
         }
         return "NAN";
     }
