@@ -1,3 +1,4 @@
 /PasswordsVault/target/
 config.dat
 passwords.json
+.DS_Store
