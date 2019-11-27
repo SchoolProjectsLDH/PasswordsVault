@@ -17,19 +17,9 @@ public class Configs {
         String[] lines = Files.readAllLines(new File("./src/main/resources/config.dat").toPath()).toArray(new String[0]);
         return lines[0];
     }
-    
+
     public String getPassword() throws IOException{
         String[] lines = Files.readAllLines(new File("./src/main/resources/config.dat").toPath()).toArray(new String[0]);
         return lines[1];
-    }
-    
-    public byte[] getKey() throws IOException{
-        String[] lines = Files.readAllLines(new File("./src/main/resources/config.dat").toPath()).toArray(new String[0]);
-        return lines[2].getBytes();
-    }
-    
-    public byte[] getIVKey() throws IOException{
-        String[] lines = Files.readAllLines(new File("./src/main/resources/config.dat").toPath()).toArray(new String[0]);
-        return lines[3].getBytes();
     }
 }
