@@ -55,10 +55,13 @@ All UML diagrams for crucial classes below. They are subject to change as we ref
 Contains images showing roughly what the GUI will look like
 
 ### Login page
+[![Login Page](https://i.gyazo.com/6aa7f39a666423b5fe5f5e77524e40ad.png)](https://gyazo.com/6aa7f39a666423b5fe5f5e77524e40ad)
 
 ### Passwords Screen
+[![Passwords Page](https://i.gyazo.com/4bf95aa41cc8ce684ff4303265a53828.png)](https://gyazo.com/4bf95aa41cc8ce684ff4303265a53828)
 
 ### Add Passwords Screen
+[![Add Password Page](https://i.gyazo.com/d83053f42f4e40f80c98dd4c9395fa7a.png)](https://gyazo.com/d83053f42f4e40f80c98dd4c9395fa7a)
 
 ## Algorithm
 See [Document](https://docs.google.com/document/d/1R-mhJIlmV5fySRAlapsGy6OOSaswbmq1BVEF4wi_m4U/edit?usp=sharing)
