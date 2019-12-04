@@ -39,7 +39,7 @@ This repository contains the code for the PasswordsVault we are working on as a 
 ## UML DIAGRAMS
 All UML diagrams for crucial classes below. They are subject to change as we refine our plan.
 
-### GameScreen
+### Login Page
 [![UML Login](https://i.gyazo.com/b7529996b799ccb00a8f139d780ff093.png)](https://gyazo.com/b7529996b799ccb00a8f139d780ff093)
 
 ### Passwords Screen
