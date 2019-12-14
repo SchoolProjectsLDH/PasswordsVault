@@ -18,7 +18,7 @@ public class PasswordsList extends javax.swing.JFrame {
         initComponents();
         
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,21 +28,155 @@ public class PasswordsList extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        directoryPane = new javax.swing.JScrollPane();
+        directoryTable = new javax.swing.JTable();
+        AddAccount = new javax.swing.JButton();
+        DeleteAccount = new javax.swing.JButton();
+        genPass = new javax.swing.JButton();
+        logOut = new javax.swing.JButton();
+        editAccount = new javax.swing.JButton();
+        changeMasterPass = new javax.swing.JButton();
+        changeMasterUser = new javax.swing.JButton();
+        TitleLabel = new javax.swing.JLabel();
+        BackTitleImg = new javax.swing.JLabel();
+        Background = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(610, 410));
+        setMinimumSize(new java.awt.Dimension(610, 410));
+        setPreferredSize(new java.awt.Dimension(610, 410));
+        setResizable(false);
+        getContentPane().setLayout(null);
+
+        directoryPane.setFocusTraversalKeysEnabled(false);
+
+        directoryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Account", "Type", "Username", "Password"
+            }
+        ));
+        directoryTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        directoryPane.setViewportView(directoryTable);
+        if (directoryTable.getColumnModel().getColumnCount() > 0) {
+            directoryTable.getColumnModel().getColumn(0).setHeaderValue("Account");
+            directoryTable.getColumnModel().getColumn(1).setHeaderValue("Type");
+            directoryTable.getColumnModel().getColumn(2).setHeaderValue("Username");
+            directoryTable.getColumnModel().getColumn(3).setHeaderValue("Password");
+        }
+
+        getContentPane().add(directoryPane);
+        directoryPane.setBounds(10, 90, 430, 280);
+        directoryPane.getAccessibleContext().setAccessibleName("");
+        directoryPane.getAccessibleContext().setAccessibleDescription("");
+
+        AddAccount.setText("Add Account");
+        AddAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddAccountActionPerformed(evt);
+            }
+        });
+        getContentPane().add(AddAccount);
+        AddAccount.setBounds(450, 90, 150, 29);
+
+        DeleteAccount.setText("Delete Account");
+        getContentPane().add(DeleteAccount);
+        DeleteAccount.setBounds(450, 120, 150, 29);
+
+        genPass.setText("Generate Password");
+        getContentPane().add(genPass);
+        genPass.setBounds(450, 180, 150, 29);
+
+        logOut.setText("Logout");
+        logOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logOutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(logOut);
+        logOut.setBounds(450, 340, 150, 29);
+
+        editAccount.setText("Edit Account");
+        getContentPane().add(editAccount);
+        editAccount.setBounds(450, 150, 150, 29);
+
+        changeMasterPass.setText("Change Master Pass");
+        changeMasterPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeMasterPassActionPerformed(evt);
+            }
+        });
+        getContentPane().add(changeMasterPass);
+        changeMasterPass.setBounds(450, 260, 150, 29);
+
+        changeMasterUser.setText("Change Master User");
+        changeMasterUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeMasterUserActionPerformed(evt);
+            }
+        });
+        getContentPane().add(changeMasterUser);
+        changeMasterUser.setBounds(450, 230, 150, 29);
+
+        TitleLabel.setBackground(new java.awt.Color(0, 102, 204));
+        TitleLabel.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
+        TitleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        TitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TitleLabel.setText("Passwords");
+        getContentPane().add(TitleLabel);
+        TitleLabel.setBounds(0, 30, 600, 43);
+
+        BackTitleImg.setBackground(new java.awt.Color(0, 102, 204));
+        BackTitleImg.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
+        BackTitleImg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BackTitleImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Title.png"))); // NOI18N
+        getContentPane().add(BackTitleImg);
+        BackTitleImg.setBounds(0, 0, 600, 100);
+
+        Background.setBackground(new java.awt.Color(0, 0, 0));
+        Background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/securitybg.jpg"))); // NOI18N
+        getContentPane().add(Background);
+        Background.setBounds(0, 0, 610, 410);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void AddAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddAccountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddAccountActionPerformed
+
+    private void logOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Login().setVisible(true);
+            }
+        });
+        this.dispose();
+    }//GEN-LAST:event_logOutActionPerformed
+
+    private void changeMasterUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeMasterUserActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ChangeUsername().setVisible(true);
+            }
+        });
+        this.dispose();
+    }//GEN-LAST:event_changeMasterUserActionPerformed
+
+    private void changeMasterPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeMasterPassActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ChangePassword().setVisible(true);
+            }
+        });
+        this.dispose();
+    }//GEN-LAST:event_changeMasterPassActionPerformed
 
     /**
      * @param args the command line arguments
@@ -80,5 +214,17 @@ public class PasswordsList extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddAccount;
+    private javax.swing.JLabel BackTitleImg;
+    private javax.swing.JLabel Background;
+    private javax.swing.JButton DeleteAccount;
+    private javax.swing.JLabel TitleLabel;
+    private javax.swing.JButton changeMasterPass;
+    private javax.swing.JButton changeMasterUser;
+    private javax.swing.JScrollPane directoryPane;
+    private javax.swing.JTable directoryTable;
+    private javax.swing.JButton editAccount;
+    private javax.swing.JButton genPass;
+    private javax.swing.JButton logOut;
     // End of variables declaration//GEN-END:variables
 }
