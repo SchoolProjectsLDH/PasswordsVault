@@ -31,14 +31,15 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Exit = new javax.swing.JButton();
         Invalid2FA = new javax.swing.JLabel();
         InvalidUser = new javax.swing.JLabel();
         InvalidPass = new javax.swing.JLabel();
         SubmitButton = new javax.swing.JButton();
         PassLabel = new javax.swing.JLabel();
+        PasswordField = new javax.swing.JPasswordField();
         UsernameField = new javax.swing.JTextField();
         UsernameLabel = new javax.swing.JLabel();
-        PasswordField = new javax.swing.JPasswordField();
         TwoFALabel = new javax.swing.JLabel();
         TwoFAField = new javax.swing.JTextField();
         TitleLabel = new javax.swing.JLabel();
@@ -47,8 +48,26 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Page");
-        setMinimumSize(new java.awt.Dimension(600, 400));
+        setMaximumSize(new java.awt.Dimension(610, 410));
+        setMinimumSize(new java.awt.Dimension(610, 410));
+        setPreferredSize(new java.awt.Dimension(610, 410));
+        setResizable(false);
         getContentPane().setLayout(null);
+
+        Exit.setBackground(new java.awt.Color(0, 0, 0));
+        Exit.setForeground(new java.awt.Color(255, 255, 255));
+        Exit.setText("Exit");
+        Exit.setToolTipText("");
+        Exit.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Exit.setBorderPainted(false);
+        Exit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Exit);
+        Exit.setBounds(30, 340, 50, 20);
 
         Invalid2FA.setBackground(new java.awt.Color(0, 102, 204));
         Invalid2FA.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
@@ -99,6 +118,14 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(PassLabel);
         PassLabel.setBounds(0, 180, 210, 43);
 
+        PasswordField.setBackground(new java.awt.Color(0, 0, 0));
+        PasswordField.setFont(new java.awt.Font("Lucida Grande", 1, 15)); // NOI18N
+        PasswordField.setForeground(new java.awt.Color(255, 255, 255));
+        PasswordField.setToolTipText("Password");
+        PasswordField.setCaretColor(new java.awt.Color(255, 255, 255));
+        getContentPane().add(PasswordField);
+        PasswordField.setBounds(170, 180, 220, 50);
+
         UsernameField.setBackground(new java.awt.Color(0, 0, 0));
         UsernameField.setFont(new java.awt.Font("Lucida Grande", 1, 15)); // NOI18N
         UsernameField.setForeground(new java.awt.Color(255, 255, 255));
@@ -119,14 +146,6 @@ public class Login extends javax.swing.JFrame {
         UsernameLabel.setText("Username:");
         getContentPane().add(UsernameLabel);
         UsernameLabel.setBounds(0, 120, 210, 43);
-
-        PasswordField.setBackground(new java.awt.Color(0, 0, 0));
-        PasswordField.setFont(new java.awt.Font("Lucida Grande", 1, 15)); // NOI18N
-        PasswordField.setForeground(new java.awt.Color(255, 255, 255));
-        PasswordField.setToolTipText("Password");
-        PasswordField.setCaretColor(new java.awt.Color(255, 255, 255));
-        getContentPane().add(PasswordField);
-        PasswordField.setBounds(170, 180, 220, 50);
 
         TwoFALabel.setBackground(new java.awt.Color(0, 102, 204));
         TwoFALabel.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
@@ -216,6 +235,10 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SubmitButtonActionPerformed
 
+    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_ExitActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -253,6 +276,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BackTitleImg;
     private javax.swing.JLabel Background;
+    private javax.swing.JButton Exit;
     private javax.swing.JLabel Invalid2FA;
     private javax.swing.JLabel InvalidPass;
     private javax.swing.JLabel InvalidUser;
