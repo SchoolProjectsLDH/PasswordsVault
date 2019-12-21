@@ -5,7 +5,6 @@
  */
 package com.theborginc.passwordsvault.GUI;
 
-import com.theborginc.passwordsvault.Auth.AuthChecker;
 import com.theborginc.passwordsvault.Auth.Configs;
 import java.io.IOException;
 
