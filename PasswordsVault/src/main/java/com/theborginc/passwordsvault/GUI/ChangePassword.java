@@ -22,6 +22,7 @@ public class ChangePassword extends javax.swing.JFrame {
         incorrectPassLabel.setVisible(false);
         dontMatchLabel.setVisible(false);
         requiredLabel.setVisible(false);
+        weakLabel.setVisible(false);
     }
     
     Configs configs = new Configs();
@@ -36,6 +37,7 @@ public class ChangePassword extends javax.swing.JFrame {
 
         requiredLabel = new javax.swing.JLabel();
         incorrectPassLabel = new javax.swing.JLabel();
+        weakLabel = new javax.swing.JLabel();
         dontMatchLabel = new javax.swing.JLabel();
         SubmitButton = new javax.swing.JButton();
         Back = new javax.swing.JButton();
@@ -69,6 +71,14 @@ public class ChangePassword extends javax.swing.JFrame {
         incorrectPassLabel.setText("Incorrect Pass");
         getContentPane().add(incorrectPassLabel);
         incorrectPassLabel.setBounds(430, 120, 180, 50);
+
+        weakLabel.setBackground(new java.awt.Color(0, 102, 204));
+        weakLabel.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
+        weakLabel.setForeground(new java.awt.Color(255, 255, 255));
+        weakLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        weakLabel.setText("Weak Password");
+        getContentPane().add(weakLabel);
+        weakLabel.setBounds(230, 290, 180, 30);
 
         dontMatchLabel.setBackground(new java.awt.Color(0, 102, 204));
         dontMatchLabel.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
@@ -161,7 +171,7 @@ public class ChangePassword extends javax.swing.JFrame {
         TitleLabel.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
         TitleLabel.setForeground(new java.awt.Color(255, 255, 255));
         TitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TitleLabel.setText("Change Username");
+        TitleLabel.setText("Change Password");
         getContentPane().add(TitleLabel);
         TitleLabel.setBounds(0, 30, 610, 43);
 
@@ -206,20 +216,30 @@ public class ChangePassword extends javax.swing.JFrame {
         return (String.valueOf(prevPassField.getPassword()).equals(configs.getPassword()) && String.valueOf(newPassField.getPassword()).equals(String.valueOf(confirmPassField.getPassword())) && (String.valueOf(newPassField.getPassword()).equals("") == false));
     }
     
+    private boolean checkStrong(){
+        String passwordSelect = String.valueOf(newPassField.getPassword());
+        return(passwordSelect.matches(".*\\d.*") && passwordSelect.matches("(?s).*[A-Z].*") && passwordSelect.matches(".*\\W.*"));
+    }
+    
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
         try{
             incorrectPassLabel.setVisible(false);
             dontMatchLabel.setVisible(false);
             requiredLabel.setVisible(false);
+            weakLabel.setVisible(false);
             this.updateInvalidFields();
             if(this.sendValid()){
-                configs.setPassword(String.valueOf(newPassField.getPassword()));
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        new PasswordsList().setVisible(true);
-                    }
-                });
-                this.dispose();
+                if(this.checkStrong()){
+                    configs.setPassword(String.valueOf(newPassField.getPassword()));
+                    java.awt.EventQueue.invokeLater(new Runnable() {
+                        public void run() {
+                            new PasswordsList().setVisible(true);
+                        }
+                    });
+                    this.dispose();
+                }else{
+                    weakLabel.setVisible(true);
+                }
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -277,5 +297,6 @@ public class ChangePassword extends javax.swing.JFrame {
     private javax.swing.JPasswordField prevPassField;
     private javax.swing.JLabel prevPassLabel;
     private javax.swing.JLabel requiredLabel;
+    private javax.swing.JLabel weakLabel;
     // End of variables declaration//GEN-END:variables
 }
