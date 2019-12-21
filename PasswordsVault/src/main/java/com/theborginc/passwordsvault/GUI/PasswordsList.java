@@ -49,6 +49,7 @@ public class PasswordsList extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         directoryPane.setFocusTraversalKeysEnabled(false);
+        directoryPane.setOpaque(false);
 
         directoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -62,6 +63,7 @@ public class PasswordsList extends javax.swing.JFrame {
             }
         ));
         directoryTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        directoryTable.setRequestFocusEnabled(false);
         directoryPane.setViewportView(directoryTable);
         if (directoryTable.getColumnModel().getColumnCount() > 0) {
             directoryTable.getColumnModel().getColumn(0).setHeaderValue("Account");
@@ -89,6 +91,11 @@ public class PasswordsList extends javax.swing.JFrame {
         DeleteAccount.setBounds(450, 120, 150, 29);
 
         genPass.setText("Generate Password");
+        genPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genPassActionPerformed(evt);
+            }
+        });
         getContentPane().add(genPass);
         genPass.setBounds(450, 180, 150, 29);
 
@@ -177,6 +184,15 @@ public class PasswordsList extends javax.swing.JFrame {
         });
         this.dispose();
     }//GEN-LAST:event_changeMasterPassActionPerformed
+
+    private void genPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genPassActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GenPass().setVisible(true);
+            }
+        });
+        this.dispose();
+    }//GEN-LAST:event_genPassActionPerformed
 
     /**
      * @param args the command line arguments
