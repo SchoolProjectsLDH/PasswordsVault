@@ -12,8 +12,9 @@ This repository contains the code for the PasswordsVault we are working on as a 
 - Generate and add accounts/passwords given requirements
 
 ## OBJECTIVES:
-- Use forms of encryption, obfuscation, and hashing technology
+- Use forms of encryption
 - Integration with google apps and OAuth 2.0
+- Learning maven
 
 ## RULES/GAME MECHANICS:
 - Login page
