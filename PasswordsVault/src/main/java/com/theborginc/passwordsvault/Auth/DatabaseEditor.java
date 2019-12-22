@@ -30,23 +30,33 @@ public class DatabaseEditor {
         } catch (Exception e){
             e.printStackTrace();
         }
-        
-        passwords.add(new Account(accountType,title,username,password)); 
-        System.out.println(passwords);
-        
+        passwords.add(new Account(accountType,title,username,password));         
         writeToFile(passwords);
     }
     
     
     public static void writeToFile(JSONArray passwords) {//Finalize the highscores by saving them to an actual location
         try (FileWriter file = new FileWriter("./src/main/resources/passwords.json")) {
-
             file.write(passwords.toString());
             file.flush();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void removeAccount(int location){
+        JSONParser jsonParser = new JSONParser();
+         
+        try (FileReader reader = new FileReader("./src/main/resources/passwords.json")){
+            //Read JSON file
+            Object obj = jsonParser.parse(reader);
+            passwords = (JSONArray) obj;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        
+        passwords.remove(location);
+        writeToFile(passwords);
     }
     
 }

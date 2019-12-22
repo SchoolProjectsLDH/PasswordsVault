@@ -36,6 +36,13 @@ public class PasswordsList extends javax.swing.JFrame {
     private void updateTable() {//update table using json
         JSONParser jsonParser = new JSONParser();
         JSONArray passwords;
+        
+        for(int i = 0; i < 100;i++){
+            directoryTable.setValueAt("", i, 0);//get scores in score field set to row and collumn
+            directoryTable.setValueAt("", i, 1);
+            directoryTable.setValueAt("", i, 2);
+            directoryTable.setValueAt("", i, 3);
+        }
         try (FileReader reader = new FileReader("./src/main/resources/passwords.json")){
             //Read JSON file
             Object obj = jsonParser.parse(reader);
@@ -226,6 +233,11 @@ public class PasswordsList extends javax.swing.JFrame {
         AddAccount.setBounds(550, 100, 150, 29);
 
         DeleteAccount.setText("Delete Account");
+        DeleteAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteAccountActionPerformed(evt);
+            }
+        });
         getContentPane().add(DeleteAccount);
         DeleteAccount.setBounds(550, 130, 150, 29);
 
@@ -343,6 +355,16 @@ public class PasswordsList extends javax.swing.JFrame {
             System.out.println("No Account Detected");
         }
     }//GEN-LAST:event_copyAccountActionPerformed
+
+    private void DeleteAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteAccountActionPerformed
+        DatabaseEditor editor = new DatabaseEditor();
+        try{
+            editor.removeAccount(directoryTable.getSelectedRow());
+        }catch(Exception e){
+            System.out.println("Deletion Failed due to invalid selection.");
+        }
+        this.updateTable();
+    }//GEN-LAST:event_DeleteAccountActionPerformed
 
     /**
      * @param args the command line arguments
