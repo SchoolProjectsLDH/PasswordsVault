@@ -37,6 +37,17 @@ public class Configs {
         return lines[1];
     }
     
+    public int getStrikes() throws IOException{
+        String[] lines = Files.readAllLines(new File("./src/main/resources/config.dat").toPath()).toArray(new String[0]);
+        return Integer.parseInt(lines[5]);
+    }
+    
+    public void addStrike() throws IOException{
+        String[] lines = Files.readAllLines(new File("./src/main/resources/config.dat").toPath()).toArray(new String[0]);
+        lines[5] = String.valueOf(Integer.parseInt(lines[5])+1);
+        write(lines);
+    }
+    
     public void setUsername(String newUsername) throws IOException{
         String[] lines = Files.readAllLines(new File("./src/main/resources/config.dat").toPath()).toArray(new String[0]);
         lines[0] = newUsername;

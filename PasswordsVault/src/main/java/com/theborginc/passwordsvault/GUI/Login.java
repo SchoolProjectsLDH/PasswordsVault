@@ -20,6 +20,7 @@ public class Login extends javax.swing.JFrame {
         Invalid2FA.setVisible(false);
         InvalidPass.setVisible(false);
         InvalidUser.setVisible(false);
+        lockedOutLabel.setVisible(false);
     }
     
     /**
@@ -34,6 +35,7 @@ public class Login extends javax.swing.JFrame {
         Exit = new javax.swing.JButton();
         Invalid2FA = new javax.swing.JLabel();
         InvalidUser = new javax.swing.JLabel();
+        lockedOutLabel = new javax.swing.JLabel();
         InvalidPass = new javax.swing.JLabel();
         SubmitButton = new javax.swing.JButton();
         PassLabel = new javax.swing.JLabel();
@@ -85,11 +87,19 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(InvalidUser);
         InvalidUser.setBounds(400, 120, 210, 43);
 
+        lockedOutLabel.setBackground(new java.awt.Color(0, 102, 204));
+        lockedOutLabel.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
+        lockedOutLabel.setForeground(new java.awt.Color(255, 255, 255));
+        lockedOutLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lockedOutLabel.setText("You Have Been Locked Out");
+        getContentPane().add(lockedOutLabel);
+        lockedOutLabel.setBounds(140, 330, 270, 43);
+
         InvalidPass.setBackground(new java.awt.Color(0, 102, 204));
         InvalidPass.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
         InvalidPass.setForeground(new java.awt.Color(255, 255, 255));
         InvalidPass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        InvalidPass.setText("Invalid Username");
+        InvalidPass.setText("Invalid Password");
         getContentPane().add(InvalidPass);
         InvalidPass.setBounds(400, 190, 210, 43);
 
@@ -213,22 +223,28 @@ public class Login extends javax.swing.JFrame {
         if(!TwoFAField.getText().equals(auth.getTFact())){
             Invalid2FA.setVisible(true);
         }
+        if(configs.getStrikes() >=5){
+            lockedOutLabel.setVisible(true);
+        }
     }
     
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
         try{
             AuthChecker auth = new AuthChecker();
+            Configs config = new Configs();
             Invalid2FA.setVisible(false);
             InvalidPass.setVisible(false);
             InvalidUser.setVisible(false);
             this.updateInvalidFields();
-            if(auth.compareValues(UsernameField.getText(), String.valueOf(PasswordField.getPassword()), TwoFAField.getText())){
+            if(auth.compareValues(UsernameField.getText(), String.valueOf(PasswordField.getPassword()), TwoFAField.getText()) && config.getStrikes() <= 5){
                 java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {
                         new PasswordsList().setVisible(true);
                     }
                 });
                 this.dispose();
+            }else{
+                config.addStrike();
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -288,5 +304,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel TwoFALabel;
     private javax.swing.JTextField UsernameField;
     private javax.swing.JLabel UsernameLabel;
+    private javax.swing.JLabel lockedOutLabel;
     // End of variables declaration//GEN-END:variables
 }
