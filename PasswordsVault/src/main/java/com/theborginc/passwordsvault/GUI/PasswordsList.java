@@ -5,12 +5,12 @@
  */
 package com.theborginc.passwordsvault.GUI;
 
+import com.theborginc.passwordsvault.Auth.*;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.FileReader;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 
 /**
@@ -19,11 +19,17 @@ import org.json.simple.parser.JSONParser;
  */
 public class PasswordsList extends javax.swing.JFrame {
     int index = 0;
+    private final Configs config = new Configs();
     /**
      * Creates new form PasswordsList
      */
     public PasswordsList() {
         initComponents();
+        try{
+            config.resetStrike();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         this.updateTable();
     }
     
