@@ -334,10 +334,14 @@ public class PasswordsList extends javax.swing.JFrame {
     }//GEN-LAST:event_genPassActionPerformed
 
     private void copyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyAccountActionPerformed
-        String password = (String) directoryTable.getValueAt(directoryTable.getSelectedRow(), 3);
-        StringSelection stringSelection = new StringSelection(password);
-        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        clipboard.setContents(stringSelection, null);
+        try{
+            String password = (String) directoryTable.getValueAt(directoryTable.getSelectedRow(), 3);
+            StringSelection stringSelection = new StringSelection(password);
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            clipboard.setContents(stringSelection, null);
+        }catch(Exception e){
+            System.out.println("No Account Detected");
+        }
     }//GEN-LAST:event_copyAccountActionPerformed
 
     /**
