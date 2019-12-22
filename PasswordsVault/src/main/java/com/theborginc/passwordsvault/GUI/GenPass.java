@@ -183,10 +183,8 @@ public class GenPass extends javax.swing.JFrame {
     }//GEN-LAST:event_numbersSelectActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PasswordsList().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new PasswordsList().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_BackActionPerformed
@@ -241,10 +239,8 @@ public class GenPass extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GenPass().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new GenPass().setVisible(true);
         });
     }
 

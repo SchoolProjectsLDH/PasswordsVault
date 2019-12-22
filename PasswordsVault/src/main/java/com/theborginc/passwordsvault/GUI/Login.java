@@ -235,10 +235,8 @@ public class Login extends javax.swing.JFrame {
             InvalidUser.setVisible(false);
             this.updateInvalidFields();
             if(auth.compareValues(UsernameField.getText(), String.valueOf(PasswordField.getPassword()), TwoFAField.getText()) && config.getStrikes() <= 5){
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        new PasswordsList().setVisible(true);
-                    }
+                java.awt.EventQueue.invokeLater(() -> {
+                    new PasswordsList().setVisible(true);
                 });
                 this.dispose();
             }else{
@@ -280,10 +278,8 @@ public class Login extends javax.swing.JFrame {
         }
         //</editor-fold>
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);                
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Login().setVisible(true);
         });
     }
 

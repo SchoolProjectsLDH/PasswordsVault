@@ -196,10 +196,8 @@ public class NewAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_titleFieldActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PasswordsList().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new PasswordsList().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_BackActionPerformed
@@ -207,10 +205,8 @@ public class NewAccount extends javax.swing.JFrame {
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
         DatabaseEditor editor = new DatabaseEditor();
         editor.JsonParse(accountTypeBox.getItemAt(accountTypeBox.getSelectedIndex()), titleField.getText(), usernameField.getText(), passwordField.getText());
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PasswordsList().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new PasswordsList().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_SubmitButtonActionPerformed

@@ -200,10 +200,8 @@ public class ChangeUsername extends javax.swing.JFrame {
     }//GEN-LAST:event_confirmUserFieldActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PasswordsList().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new PasswordsList().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_BackActionPerformed
@@ -224,10 +222,8 @@ public class ChangeUsername extends javax.swing.JFrame {
             this.updateInvalidFields();
             if(prevUserField.getText().equals(configs.getUsername()) && newUserField.getText().equals(confirmUserField.getText())){
                 configs.setUsername(newUserField.getText());
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        new PasswordsList().setVisible(true);
-                    }
+                java.awt.EventQueue.invokeLater(() -> {
+                    new PasswordsList().setVisible(true);
                 });
                 this.dispose();
             }
@@ -264,10 +260,8 @@ public class ChangeUsername extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ChangeUsername().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new ChangeUsername().setVisible(true);
         });
     }
 

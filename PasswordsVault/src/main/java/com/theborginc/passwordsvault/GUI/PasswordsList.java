@@ -299,46 +299,36 @@ public class PasswordsList extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddAccountActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NewAccount().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new NewAccount().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_AddAccountActionPerformed
 
     private void logOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Login().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_logOutActionPerformed
 
     private void changeMasterUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeMasterUserActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ChangeUsername().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new ChangeUsername().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_changeMasterUserActionPerformed
 
     private void changeMasterPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeMasterPassActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ChangePassword().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new ChangePassword().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_changeMasterPassActionPerformed
 
     private void genPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genPassActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GenPass().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new GenPass().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_genPassActionPerformed
@@ -378,10 +368,8 @@ public class PasswordsList extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PasswordsList().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new PasswordsList().setVisible(true);
         });
     }
 
