@@ -11,7 +11,7 @@ import java.io.IOException;
  * @author keshavgupta
  */
 public class Login extends javax.swing.JFrame {
-
+    private final Configs config = new Configs();
     /**
      * Creates new form Login
      */
@@ -213,17 +213,16 @@ public class Login extends javax.swing.JFrame {
     
     private void updateInvalidFields() throws IOException{
         AuthChecker auth = new AuthChecker();
-        Configs configs = new Configs();
-        if(!UsernameField.getText().equals(configs.getUsername())){
+        if(!UsernameField.getText().equals(config.getUsername())){
             InvalidUser.setVisible(true);
         }
-        if(!String.valueOf(PasswordField.getPassword()).equals(configs.getPassword())){
+        if(!String.valueOf(PasswordField.getPassword()).equals(config.getPassword())){
             InvalidPass.setVisible(true);
         }
         if(!TwoFAField.getText().equals(auth.getTFact())){
             Invalid2FA.setVisible(true);
         }
-        if(configs.getStrikes() >=5){
+        if(config.getStrikes() >=5){
             lockedOutLabel.setVisible(true);
         }
     }
@@ -231,7 +230,6 @@ public class Login extends javax.swing.JFrame {
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
         try{
             AuthChecker auth = new AuthChecker();
-            Configs config = new Configs();
             Invalid2FA.setVisible(false);
             InvalidPass.setVisible(false);
             InvalidUser.setVisible(false);
