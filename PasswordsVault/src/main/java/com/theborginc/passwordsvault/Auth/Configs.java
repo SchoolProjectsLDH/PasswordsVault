@@ -27,35 +27,45 @@ public class Configs {
         outputWriter.close();  
     }
     
+    private String[] readFile() throws IOException{
+        return Files.readAllLines(new File("./src/main/resources/config.dat").toPath()).toArray(new String[0]);
+    }
+    
     public String getUsername() throws IOException{
-        String[] lines = Files.readAllLines(new File("./src/main/resources/config.dat").toPath()).toArray(new String[0]);
+        String[] lines = readFile();
         return lines[0];
     }
 
     public String getPassword() throws IOException{
-        String[] lines = Files.readAllLines(new File("./src/main/resources/config.dat").toPath()).toArray(new String[0]);
+        String[] lines = readFile();
         return lines[1];
     }
     
     public int getStrikes() throws IOException{
-        String[] lines = Files.readAllLines(new File("./src/main/resources/config.dat").toPath()).toArray(new String[0]);
+        String[] lines = readFile();
         return Integer.parseInt(lines[5]);
     }
     
     public void addStrike() throws IOException{
-        String[] lines = Files.readAllLines(new File("./src/main/resources/config.dat").toPath()).toArray(new String[0]);
+        String[] lines = readFile();
         lines[5] = String.valueOf(Integer.parseInt(lines[5])+1);
         write(lines);
     }
     
+    public void resetStrike() throws IOException{
+        String[] lines = readFile();
+        lines[5] = "0";
+        write(lines);
+    }
+    
     public void setUsername(String newUsername) throws IOException{
-        String[] lines = Files.readAllLines(new File("./src/main/resources/config.dat").toPath()).toArray(new String[0]);
+        String[] lines = readFile();
         lines[0] = newUsername;
         write(lines);
     }
     
     public void setPassword(String newPass) throws IOException{
-        String[] lines = Files.readAllLines(new File("./src/main/resources/config.dat").toPath()).toArray(new String[0]);
+        String[] lines = readFile();
         lines[1] = newPass;
         write(lines);
     }
