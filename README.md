@@ -1,5 +1,5 @@
 # PasswordsVault
-This repository contains the code for the PasswordsVault we are working on as a grade 12 ICS summative.
+This repository contains the code for the PasswordsVault.
 
 # Planning
 
