@@ -69,7 +69,7 @@ public class PasswordsList extends javax.swing.JFrame {
         DeleteAccount = new javax.swing.JButton();
         genPass = new javax.swing.JButton();
         logOut = new javax.swing.JButton();
-        editAccount = new javax.swing.JButton();
+        copyAccount = new javax.swing.JButton();
         changeMasterPass = new javax.swing.JButton();
         changeMasterUser = new javax.swing.JButton();
         TitleLabel = new javax.swing.JLabel();
@@ -247,14 +247,14 @@ public class PasswordsList extends javax.swing.JFrame {
         getContentPane().add(logOut);
         logOut.setBounds(550, 390, 150, 29);
 
-        editAccount.setText("Copy Selected Pass");
-        editAccount.addActionListener(new java.awt.event.ActionListener() {
+        copyAccount.setText("Copy Selected Pass");
+        copyAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editAccountActionPerformed(evt);
+                copyAccountActionPerformed(evt);
             }
         });
-        getContentPane().add(editAccount);
-        editAccount.setBounds(550, 160, 150, 29);
+        getContentPane().add(copyAccount);
+        copyAccount.setBounds(550, 160, 150, 29);
 
         changeMasterPass.setText("Change Master Pass");
         changeMasterPass.addActionListener(new java.awt.event.ActionListener() {
@@ -343,12 +343,12 @@ public class PasswordsList extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_genPassActionPerformed
 
-    private void editAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAccountActionPerformed
+    private void copyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyAccountActionPerformed
         String password = (String) directoryTable.getValueAt(directoryTable.getSelectedRow(), 3);
         StringSelection stringSelection = new StringSelection(password);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(stringSelection, null);
-    }//GEN-LAST:event_editAccountActionPerformed
+    }//GEN-LAST:event_copyAccountActionPerformed
 
     /**
      * @param args the command line arguments
@@ -393,9 +393,9 @@ public class PasswordsList extends javax.swing.JFrame {
     private javax.swing.JLabel TitleLabel;
     private javax.swing.JButton changeMasterPass;
     private javax.swing.JButton changeMasterUser;
+    private javax.swing.JButton copyAccount;
     private javax.swing.JScrollPane directoryPane;
     private javax.swing.JTable directoryTable;
-    private javax.swing.JButton editAccount;
     private javax.swing.JButton genPass;
     private javax.swing.JButton logOut;
     // End of variables declaration//GEN-END:variables
