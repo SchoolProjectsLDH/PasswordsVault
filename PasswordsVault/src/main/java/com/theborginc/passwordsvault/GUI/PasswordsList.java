@@ -5,20 +5,49 @@
  */
 package com.theborginc.passwordsvault.GUI;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.io.FileReader;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 /**
  *
  * @author keshavgupta
  */
 public class PasswordsList extends javax.swing.JFrame {
-
+    int index = 0;
     /**
      * Creates new form PasswordsList
      */
     public PasswordsList() {
         initComponents();
-        
+        this.updateTable();
     }
     
+    private void updateTable() {//update table using json
+        JSONParser jsonParser = new JSONParser();
+        JSONArray passwords;
+        try (FileReader reader = new FileReader("./src/main/resources/passwords.json")){
+            //Read JSON file
+            Object obj = jsonParser.parse(reader);
+            passwords = (JSONArray) obj;
+            passwords.forEach( emp -> parseObject( (JSONObject) emp ) );
+            index = 0;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    private void parseObject(JSONObject passwords){
+        directoryTable.setValueAt(passwords.get("account"), index, 0);//get scores in score field set to row and collumn
+        directoryTable.setValueAt(passwords.get("title"), index, 1);
+        directoryTable.setValueAt(passwords.get("username"), index, 2);
+        directoryTable.setValueAt(passwords.get("password"), index, 3);
+        index++;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,9 +71,9 @@ public class PasswordsList extends javax.swing.JFrame {
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(610, 410));
-        setMinimumSize(new java.awt.Dimension(610, 410));
-        setPreferredSize(new java.awt.Dimension(610, 410));
+        setMaximumSize(new java.awt.Dimension(711, 452));
+        setMinimumSize(new java.awt.Dimension(711, 452));
+        setPreferredSize(new java.awt.Dimension(711, 452));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -56,12 +85,116 @@ public class PasswordsList extends javax.swing.JFrame {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "Account", "Type", "Username", "Password"
+                "Account", "Title", "Username", "Password"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         directoryTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         directoryTable.setRequestFocusEnabled(false);
         directoryPane.setViewportView(directoryTable);
@@ -73,7 +206,7 @@ public class PasswordsList extends javax.swing.JFrame {
         }
 
         getContentPane().add(directoryPane);
-        directoryPane.setBounds(10, 90, 430, 280);
+        directoryPane.setBounds(10, 90, 540, 330);
         directoryPane.getAccessibleContext().setAccessibleName("");
         directoryPane.getAccessibleContext().setAccessibleDescription("");
 
@@ -84,11 +217,11 @@ public class PasswordsList extends javax.swing.JFrame {
             }
         });
         getContentPane().add(AddAccount);
-        AddAccount.setBounds(450, 90, 150, 29);
+        AddAccount.setBounds(550, 100, 150, 29);
 
         DeleteAccount.setText("Delete Account");
         getContentPane().add(DeleteAccount);
-        DeleteAccount.setBounds(450, 120, 150, 29);
+        DeleteAccount.setBounds(550, 130, 150, 29);
 
         genPass.setText("Generate Password");
         genPass.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +230,7 @@ public class PasswordsList extends javax.swing.JFrame {
             }
         });
         getContentPane().add(genPass);
-        genPass.setBounds(450, 180, 150, 29);
+        genPass.setBounds(550, 190, 150, 29);
 
         logOut.setText("Logout");
         logOut.addActionListener(new java.awt.event.ActionListener() {
@@ -106,11 +239,16 @@ public class PasswordsList extends javax.swing.JFrame {
             }
         });
         getContentPane().add(logOut);
-        logOut.setBounds(450, 340, 150, 29);
+        logOut.setBounds(550, 390, 150, 29);
 
-        editAccount.setText("Edit Account");
+        editAccount.setText("Copy Selected Pass");
+        editAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editAccountActionPerformed(evt);
+            }
+        });
         getContentPane().add(editAccount);
-        editAccount.setBounds(450, 150, 150, 29);
+        editAccount.setBounds(550, 160, 150, 29);
 
         changeMasterPass.setText("Change Master Pass");
         changeMasterPass.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +257,7 @@ public class PasswordsList extends javax.swing.JFrame {
             }
         });
         getContentPane().add(changeMasterPass);
-        changeMasterPass.setBounds(450, 260, 150, 29);
+        changeMasterPass.setBounds(550, 300, 150, 29);
 
         changeMasterUser.setText("Change Master User");
         changeMasterUser.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +266,7 @@ public class PasswordsList extends javax.swing.JFrame {
             }
         });
         getContentPane().add(changeMasterUser);
-        changeMasterUser.setBounds(450, 230, 150, 29);
+        changeMasterUser.setBounds(550, 270, 150, 29);
 
         TitleLabel.setBackground(new java.awt.Color(0, 102, 204));
         TitleLabel.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
@@ -136,26 +274,31 @@ public class PasswordsList extends javax.swing.JFrame {
         TitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TitleLabel.setText("Passwords");
         getContentPane().add(TitleLabel);
-        TitleLabel.setBounds(0, 30, 600, 43);
+        TitleLabel.setBounds(0, 30, 710, 43);
 
         BackTitleImg.setBackground(new java.awt.Color(0, 102, 204));
         BackTitleImg.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
         BackTitleImg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         BackTitleImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Title.png"))); // NOI18N
         getContentPane().add(BackTitleImg);
-        BackTitleImg.setBounds(0, 0, 600, 100);
+        BackTitleImg.setBounds(0, 0, 710, 100);
 
         Background.setBackground(new java.awt.Color(0, 0, 0));
         Background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/securitybg.jpg"))); // NOI18N
         getContentPane().add(Background);
-        Background.setBounds(0, 0, 610, 410);
+        Background.setBounds(0, 0, 710, 450);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddAccountActionPerformed
-        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new NewAccount().setVisible(true);
+            }
+        });
+        this.dispose();
     }//GEN-LAST:event_AddAccountActionPerformed
 
     private void logOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutActionPerformed
@@ -193,6 +336,13 @@ public class PasswordsList extends javax.swing.JFrame {
         });
         this.dispose();
     }//GEN-LAST:event_genPassActionPerformed
+
+    private void editAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAccountActionPerformed
+        String password = (String) directoryTable.getValueAt(directoryTable.getSelectedRow(), 3);
+        StringSelection stringSelection = new StringSelection(password);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(stringSelection, null);
+    }//GEN-LAST:event_editAccountActionPerformed
 
     /**
      * @param args the command line arguments
