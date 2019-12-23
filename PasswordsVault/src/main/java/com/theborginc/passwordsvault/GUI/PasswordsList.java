@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.theborginc.passwordsvault.GUI;
 
 import com.theborginc.passwordsvault.Auth.*;
@@ -11,7 +6,6 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.FileReader;
-import java.io.IOException;
 import javax.crypto.Cipher;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
