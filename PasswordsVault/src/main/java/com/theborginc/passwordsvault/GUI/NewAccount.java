@@ -18,6 +18,7 @@ public class NewAccount extends javax.swing.JFrame {
      */
     public NewAccount() {
         initComponents();
+        unfilledParram.setVisible(false);
     }
 
     /**
@@ -29,6 +30,7 @@ public class NewAccount extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        unfilledParram = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
         passwordField = new javax.swing.JTextField();
         usernameLabel = new javax.swing.JLabel();
@@ -47,6 +49,14 @@ public class NewAccount extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(610, 410));
         setMinimumSize(new java.awt.Dimension(610, 410));
         getContentPane().setLayout(null);
+
+        unfilledParram.setBackground(new java.awt.Color(0, 102, 204));
+        unfilledParram.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
+        unfilledParram.setForeground(new java.awt.Color(255, 255, 255));
+        unfilledParram.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        unfilledParram.setText("Please Fill In the Parameters");
+        getContentPane().add(unfilledParram);
+        unfilledParram.setBounds(140, 300, 330, 43);
 
         passwordLabel.setBackground(new java.awt.Color(0, 102, 204));
         passwordLabel.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
@@ -202,13 +212,22 @@ public class NewAccount extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BackActionPerformed
 
+    private boolean checkFilled(){
+        return(!titleField.getText().equals("") && !usernameField.getText().equals("") && !passwordField.getText().equals(""));
+    }
+    
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
         DatabaseEditor editor = new DatabaseEditor();
-        editor.JsonParse(accountTypeBox.getItemAt(accountTypeBox.getSelectedIndex()), titleField.getText(), usernameField.getText(), passwordField.getText());
-        java.awt.EventQueue.invokeLater(() -> {
-            new PasswordsList().setVisible(true);
-        });
-        this.dispose();
+        unfilledParram.setVisible(false);
+        if(this.checkFilled()){
+            editor.JsonParse(accountTypeBox.getItemAt(accountTypeBox.getSelectedIndex()), titleField.getText(), usernameField.getText(), passwordField.getText());
+            java.awt.EventQueue.invokeLater(() -> {
+                new PasswordsList().setVisible(true);
+            });
+            this.dispose();
+        }else{
+            unfilledParram.setVisible(true);
+        }
     }//GEN-LAST:event_SubmitButtonActionPerformed
 
     private void accountTypeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountTypeBoxActionPerformed
@@ -270,6 +289,7 @@ public class NewAccount extends javax.swing.JFrame {
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JTextField titleField;
     private javax.swing.JLabel titleLabel;
+    private javax.swing.JLabel unfilledParram;
     private javax.swing.JTextField usernameField;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables

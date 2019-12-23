@@ -21,6 +21,7 @@ public class ChangeUsername extends javax.swing.JFrame {
         initComponents();
         incorrectUserLabel.setVisible(false);
         dontMatchLabel.setVisible(false);
+        requiredLabel.setVisible(false);
     }
     
     Configs configs = new Configs();
@@ -34,6 +35,7 @@ public class ChangeUsername extends javax.swing.JFrame {
     private void initComponents() {
 
         incorrectUserLabel = new javax.swing.JLabel();
+        requiredLabel = new javax.swing.JLabel();
         dontMatchLabel = new javax.swing.JLabel();
         SubmitButton = new javax.swing.JButton();
         Back = new javax.swing.JButton();
@@ -60,6 +62,14 @@ public class ChangeUsername extends javax.swing.JFrame {
         incorrectUserLabel.setText("Incorrect User");
         getContentPane().add(incorrectUserLabel);
         incorrectUserLabel.setBounds(430, 120, 180, 50);
+
+        requiredLabel.setBackground(new java.awt.Color(0, 102, 204));
+        requiredLabel.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
+        requiredLabel.setForeground(new java.awt.Color(255, 255, 255));
+        requiredLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        requiredLabel.setText("Required!");
+        getContentPane().add(requiredLabel);
+        requiredLabel.setBounds(430, 180, 180, 50);
 
         dontMatchLabel.setBackground(new java.awt.Color(0, 102, 204));
         dontMatchLabel.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
@@ -213,14 +223,18 @@ public class ChangeUsername extends javax.swing.JFrame {
         if(!newUserField.getText().equals(confirmUserField.getText())){
             dontMatchLabel.setVisible(true);
         }
+        if(newUserField.getText().equals("")){
+            requiredLabel.setVisible(true);
+        }
     }
     
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
         try{
             incorrectUserLabel.setVisible(false);
             dontMatchLabel.setVisible(false);
+            requiredLabel.setVisible(false);
             this.updateInvalidFields();
-            if(prevUserField.getText().equals(configs.getUsername()) && newUserField.getText().equals(confirmUserField.getText())){
+            if(prevUserField.getText().equals(configs.getUsername()) && newUserField.getText().equals(confirmUserField.getText()) && !newUserField.getText().equals("")){
                 configs.setUsername(newUserField.getText());
                 java.awt.EventQueue.invokeLater(() -> {
                     new PasswordsList().setVisible(true);
@@ -279,5 +293,6 @@ public class ChangeUsername extends javax.swing.JFrame {
     private javax.swing.JLabel newUserLabel;
     private javax.swing.JTextField prevUserField;
     private javax.swing.JLabel prevUserLabel;
+    private javax.swing.JLabel requiredLabel;
     // End of variables declaration//GEN-END:variables
 }

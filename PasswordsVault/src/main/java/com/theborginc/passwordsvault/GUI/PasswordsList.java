@@ -355,6 +355,8 @@ public class PasswordsList extends javax.swing.JFrame {
             clipboard.setContents(stringSelection, null);
         }catch(HeadlessException e){
             System.out.println("No Account Detected");
+        }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("Table Empty");
         }
     }//GEN-LAST:event_copyAccountActionPerformed
 
