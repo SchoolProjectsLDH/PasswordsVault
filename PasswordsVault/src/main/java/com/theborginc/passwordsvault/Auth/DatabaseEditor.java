@@ -15,6 +15,7 @@ import org.json.simple.parser.JSONParser;
  */
 public class DatabaseEditor {
     JSONArray passwords;
+    Configs config = new Configs();
     
     private final static String PASSWORD_TEXT = "./src/main/resources/passwords.txt";
     private final static String PASSWORD_JSON = "./src/main/resources/passwords.json";
@@ -22,8 +23,9 @@ public class DatabaseEditor {
     public void JsonParse(String accountType, String title, String username, String password) throws Exception{
         JSONParser jsonParser = new JSONParser();
         EncryptDecrypt cipherHandler = new EncryptDecrypt();
-        Configs config = new Configs();
+        
         cipherHandler.encrypt(config.getSecretKey(), Cipher.DECRYPT_MODE, PASSWORD_TEXT, PASSWORD_JSON);
+        
         try (FileReader reader = new FileReader(PASSWORD_JSON)){
             //Read JSON file
             Object obj = jsonParser.parse(reader);
@@ -33,6 +35,7 @@ public class DatabaseEditor {
         }
         passwords.add(new Account(accountType,title,username,password));         
         writeToFile(passwords);
+        
         cipherHandler.encrypt(config.getSecretKey(), Cipher.ENCRYPT_MODE, PASSWORD_JSON, PASSWORD_TEXT);
         cipherHandler.clear();
     }
@@ -50,8 +53,9 @@ public class DatabaseEditor {
     public void removeAccount(int location) throws Exception{
         JSONParser jsonParser = new JSONParser();
         EncryptDecrypt cipherHandler = new EncryptDecrypt();
-        Configs config = new Configs();
+        
         cipherHandler.encrypt(config.getSecretKey(), Cipher.DECRYPT_MODE, PASSWORD_TEXT, PASSWORD_JSON);
+        
         try (FileReader reader = new FileReader(PASSWORD_JSON)){
             //Read JSON file
             Object obj = jsonParser.parse(reader);
@@ -59,9 +63,9 @@ public class DatabaseEditor {
         } catch (Exception e){
             System.out.println("Account removal failed due to invalid json object");
         }
-        
         passwords.remove(location);
         writeToFile(passwords);
+        
         cipherHandler.encrypt(config.getSecretKey(), Cipher.ENCRYPT_MODE, PASSWORD_JSON, PASSWORD_TEXT);
         cipherHandler.clear();
     }
