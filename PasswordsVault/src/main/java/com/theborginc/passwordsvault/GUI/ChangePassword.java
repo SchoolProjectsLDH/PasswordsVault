@@ -6,7 +6,16 @@
 package com.theborginc.passwordsvault.GUI;
 
 import com.theborginc.passwordsvault.Auth.Configs;
+import com.theborginc.passwordsvault.Auth.GoogleAuthMaker;
+import java.awt.Desktop;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -39,6 +48,7 @@ public class ChangePassword extends javax.swing.JFrame {
         incorrectPassLabel = new javax.swing.JLabel();
         weakLabel = new javax.swing.JLabel();
         dontMatchLabel = new javax.swing.JLabel();
+        Regen2FA = new javax.swing.JButton();
         SubmitButton = new javax.swing.JButton();
         Back = new javax.swing.JButton();
         confirmLabel = new javax.swing.JLabel();
@@ -87,6 +97,21 @@ public class ChangePassword extends javax.swing.JFrame {
         dontMatchLabel.setText("Don't match!");
         getContentPane().add(dontMatchLabel);
         dontMatchLabel.setBounds(430, 240, 180, 50);
+
+        Regen2FA.setBackground(new java.awt.Color(0, 0, 0));
+        Regen2FA.setForeground(new java.awt.Color(255, 255, 255));
+        Regen2FA.setText("Regenerate 2FA Key");
+        Regen2FA.setToolTipText("");
+        Regen2FA.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Regen2FA.setBorderPainted(false);
+        Regen2FA.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Regen2FA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Regen2FAActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Regen2FA);
+        Regen2FA.setBounds(30, 280, 130, 30);
 
         SubmitButton.setBackground(new java.awt.Color(0, 0, 0));
         SubmitButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -242,6 +267,18 @@ public class ChangePassword extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SubmitButtonActionPerformed
 
+    private void Regen2FAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Regen2FAActionPerformed
+        GoogleAuthMaker twoFAMaker = new GoogleAuthMaker();
+        try {
+            StringSelection stringSelection = new StringSelection(twoFAMaker.newCode());
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            clipboard.setContents(stringSelection, null);
+            Regen2FA.setText("Paste To Browser");
+        } catch (IOException e) {
+            System.out.println("Write Error");
+        }
+    }//GEN-LAST:event_Regen2FAActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -280,6 +317,7 @@ public class ChangePassword extends javax.swing.JFrame {
     private javax.swing.JButton Back;
     private javax.swing.JLabel BackTitleImg;
     private javax.swing.JLabel Background;
+    private javax.swing.JButton Regen2FA;
     private javax.swing.JButton SubmitButton;
     private javax.swing.JLabel TitleLabel;
     private javax.swing.JLabel confirmLabel;
