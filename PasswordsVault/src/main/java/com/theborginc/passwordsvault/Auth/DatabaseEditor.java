@@ -8,6 +8,7 @@ package com.theborginc.passwordsvault.Auth;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.crypto.Cipher;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
@@ -20,9 +21,11 @@ import org.json.simple.parser.JSONParser;
 public class DatabaseEditor {
     JSONArray passwords;
     
-    public void JsonParse(String accountType, String title, String username, String password){
+    public void JsonParse(String accountType, String title, String username, String password) throws Exception{
         JSONParser jsonParser = new JSONParser();
-         
+        EncryptDecrypt cipherHandler = new EncryptDecrypt();
+        Configs config = new Configs();
+        cipherHandler.encrypt(config.getSecretKey(), Cipher.DECRYPT_MODE, "./src/main/resources/passwords.txt", "./src/main/resources/passwords.json");
         try (FileReader reader = new FileReader("./src/main/resources/passwords.json")){
             //Read JSON file
             Object obj = jsonParser.parse(reader);
@@ -32,6 +35,8 @@ public class DatabaseEditor {
         }
         passwords.add(new Account(accountType,title,username,password));         
         writeToFile(passwords);
+        cipherHandler.encrypt(config.getSecretKey(), Cipher.ENCRYPT_MODE, "./src/main/resources/passwords.json", "./src/main/resources/passwords.txt");
+        cipherHandler.clear();
     }
     
     
@@ -44,9 +49,11 @@ public class DatabaseEditor {
         }
     }
     
-    public void removeAccount(int location){
+    public void removeAccount(int location) throws Exception{
         JSONParser jsonParser = new JSONParser();
-         
+        EncryptDecrypt cipherHandler = new EncryptDecrypt();
+        Configs config = new Configs();
+        cipherHandler.encrypt(config.getSecretKey(), Cipher.DECRYPT_MODE, "./src/main/resources/passwords.txt", "./src/main/resources/passwords.json");
         try (FileReader reader = new FileReader("./src/main/resources/passwords.json")){
             //Read JSON file
             Object obj = jsonParser.parse(reader);
@@ -57,6 +64,8 @@ public class DatabaseEditor {
         
         passwords.remove(location);
         writeToFile(passwords);
+        cipherHandler.encrypt(config.getSecretKey(), Cipher.ENCRYPT_MODE, "./src/main/resources/passwords.json", "./src/main/resources/passwords.txt");
+        cipherHandler.clear();
     }
     
 }

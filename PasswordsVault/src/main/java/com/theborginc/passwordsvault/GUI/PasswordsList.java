@@ -12,6 +12,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.FileReader;
 import java.io.IOException;
+import javax.crypto.Cipher;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 
@@ -29,13 +30,13 @@ public class PasswordsList extends javax.swing.JFrame {
         initComponents();
         try{
             config.resetStrike();
-        }catch(IOException e){
+            this.updateTable();
+        }catch(Exception e){
             System.out.println("Failed to write to configs");
         }
-        this.updateTable();
     }
     
-    private void updateTable() {//update table using json
+    private void updateTable() throws Exception {//update table using json
         JSONParser jsonParser = new JSONParser();
         JSONArray passwords;
         
@@ -45,12 +46,15 @@ public class PasswordsList extends javax.swing.JFrame {
             directoryTable.setValueAt("", i, 2);
             directoryTable.setValueAt("", i, 3);
         }
+        EncryptDecrypt cipherHandler = new EncryptDecrypt();
+        cipherHandler.encrypt(config.getSecretKey(), Cipher.DECRYPT_MODE, "./src/main/resources/passwords.txt", "./src/main/resources/passwords.json");
         try (FileReader reader = new FileReader("./src/main/resources/passwords.json")){
             //Read JSON file
             Object obj = jsonParser.parse(reader);
             passwords = (JSONArray) obj;
             passwords.forEach( emp -> parseObject( (JSONObject) emp ) );
             index = 0;
+            cipherHandler.clear();
         } catch (Exception e){
             System.out.println("Failed to cast as json array");
         }
@@ -364,10 +368,10 @@ public class PasswordsList extends javax.swing.JFrame {
         DatabaseEditor editor = new DatabaseEditor();
         try{
             editor.removeAccount(directoryTable.getSelectedRow());
+            this.updateTable();
         }catch(Exception e){
             System.out.println("Deletion Failed due to invalid selection.");
         }
-        this.updateTable();
     }//GEN-LAST:event_DeleteAccountActionPerformed
 
     /**
