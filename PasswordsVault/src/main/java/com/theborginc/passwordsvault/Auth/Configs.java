@@ -43,18 +43,18 @@ public class Configs {
     
     public int getStrikes() throws IOException{
         String[] lines = readFile();
-        return Integer.parseInt(lines[5]);
+        return Integer.parseInt(lines[3]);
     }
     
     public void addStrike() throws IOException{
         String[] lines = readFile();
-        lines[5] = String.valueOf(Integer.parseInt(lines[5])+1);
+        lines[3] = String.valueOf(Integer.parseInt(lines[5])+1);
         write(lines);
     }
     
     public void resetStrike() throws IOException{
         String[] lines = readFile();
-        lines[5] = "0";
+        lines[3] = "0";
         write(lines);
     }
     
