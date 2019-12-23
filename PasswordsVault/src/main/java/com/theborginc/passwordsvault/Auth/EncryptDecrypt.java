@@ -66,10 +66,4 @@ public class EncryptDecrypt {
         input.close();
         output.close();
     }
-    
-    public static void main(String args[]) throws Exception{
-        EncryptDecrypt e = new EncryptDecrypt();
-        Configs conf = new Configs();
-        e.encrypt(conf.getSecretKey(), Cipher.ENCRYPT_MODE, "./src/main/resources/passwords.json", "./src/main/resources/passwords.txt");
-    }
 }
