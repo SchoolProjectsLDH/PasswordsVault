@@ -16,12 +16,15 @@ import org.json.simple.parser.JSONParser;
 public class DatabaseEditor {
     JSONArray passwords;
     
+    private final static String PASSWORD_TEXT = "./src/main/resources/passwords.txt";
+    private final static String PASSWORD_JSON = "./src/main/resources/passwords.json";
+    
     public void JsonParse(String accountType, String title, String username, String password) throws Exception{
         JSONParser jsonParser = new JSONParser();
         EncryptDecrypt cipherHandler = new EncryptDecrypt();
         Configs config = new Configs();
-        cipherHandler.encrypt(config.getSecretKey(), Cipher.DECRYPT_MODE, "./src/main/resources/passwords.txt", "./src/main/resources/passwords.json");
-        try (FileReader reader = new FileReader("./src/main/resources/passwords.json")){
+        cipherHandler.encrypt(config.getSecretKey(), Cipher.DECRYPT_MODE, PASSWORD_TEXT, PASSWORD_JSON);
+        try (FileReader reader = new FileReader(PASSWORD_JSON)){
             //Read JSON file
             Object obj = jsonParser.parse(reader);
             passwords = (JSONArray) obj;
@@ -30,13 +33,13 @@ public class DatabaseEditor {
         }
         passwords.add(new Account(accountType,title,username,password));         
         writeToFile(passwords);
-        cipherHandler.encrypt(config.getSecretKey(), Cipher.ENCRYPT_MODE, "./src/main/resources/passwords.json", "./src/main/resources/passwords.txt");
+        cipherHandler.encrypt(config.getSecretKey(), Cipher.ENCRYPT_MODE, PASSWORD_JSON, PASSWORD_TEXT);
         cipherHandler.clear();
     }
     
     
     public static void writeToFile(JSONArray passwords) {
-        try (FileWriter file = new FileWriter("./src/main/resources/passwords.json")) {
+        try (FileWriter file = new FileWriter(PASSWORD_JSON)) {
             file.write(passwords.toString());
             file.flush();
         } catch (IOException e) {
@@ -48,8 +51,8 @@ public class DatabaseEditor {
         JSONParser jsonParser = new JSONParser();
         EncryptDecrypt cipherHandler = new EncryptDecrypt();
         Configs config = new Configs();
-        cipherHandler.encrypt(config.getSecretKey(), Cipher.DECRYPT_MODE, "./src/main/resources/passwords.txt", "./src/main/resources/passwords.json");
-        try (FileReader reader = new FileReader("./src/main/resources/passwords.json")){
+        cipherHandler.encrypt(config.getSecretKey(), Cipher.DECRYPT_MODE, PASSWORD_TEXT, PASSWORD_JSON);
+        try (FileReader reader = new FileReader(PASSWORD_JSON)){
             //Read JSON file
             Object obj = jsonParser.parse(reader);
             passwords = (JSONArray) obj;
@@ -59,7 +62,7 @@ public class DatabaseEditor {
         
         passwords.remove(location);
         writeToFile(passwords);
-        cipherHandler.encrypt(config.getSecretKey(), Cipher.ENCRYPT_MODE, "./src/main/resources/passwords.json", "./src/main/resources/passwords.txt");
+        cipherHandler.encrypt(config.getSecretKey(), Cipher.ENCRYPT_MODE, PASSWORD_JSON, PASSWORD_TEXT);
         cipherHandler.clear();
     }
     
