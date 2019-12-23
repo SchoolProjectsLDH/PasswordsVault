@@ -17,10 +17,10 @@ import java.nio.file.Files;
 public class Configs {
     
     private static void write(String[] parrameters) throws IOException{
-        BufferedWriter outputWriter = null;
+        BufferedWriter outputWriter;
         outputWriter = new BufferedWriter(new FileWriter("./src/main/resources/config.dat"));
-        for (int i = 0; i < parrameters.length; i++) {
-            outputWriter.write(parrameters[i]+"");
+        for (String parrameter : parrameters) {
+            outputWriter.write(parrameter + "");
             outputWriter.newLine();
         }
         outputWriter.flush();  

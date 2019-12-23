@@ -28,19 +28,19 @@ public class DatabaseEditor {
             Object obj = jsonParser.parse(reader);
             passwords = (JSONArray) obj;
         } catch (Exception e){
-            e.printStackTrace();
+            System.out.println("Invalid json array");
         }
         passwords.add(new Account(accountType,title,username,password));         
         writeToFile(passwords);
     }
     
     
-    public static void writeToFile(JSONArray passwords) {//Finalize the highscores by saving them to an actual location
+    public static void writeToFile(JSONArray passwords) {
         try (FileWriter file = new FileWriter("./src/main/resources/passwords.json")) {
             file.write(passwords.toString());
             file.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Failed to write to file. FNF");
         }
     }
     
@@ -52,7 +52,7 @@ public class DatabaseEditor {
             Object obj = jsonParser.parse(reader);
             passwords = (JSONArray) obj;
         } catch (Exception e){
-            e.printStackTrace();
+            System.out.println("Account removal failed due to invalid json object");
         }
         
         passwords.remove(location);
@@ -78,19 +78,19 @@ class Account implements JSONAware {
         sb.append("{");
         sb.append("\"account\"");
         sb.append(":");
-        sb.append("\"" + JSONObject.escape(accountType) + "\"");
+        sb.append("\"").append(JSONObject.escape(accountType)).append("\"");
         sb.append(",");
         sb.append("\"title\"");
         sb.append(":");
-        sb.append("\"" + JSONObject.escape(title) + "\"");
+        sb.append("\"").append(JSONObject.escape(title)).append("\"");
         sb.append(",");
         sb.append("\"username\"");
         sb.append(":");
-        sb.append("\"" + JSONObject.escape(username) + "\"");
+        sb.append("\"").append(JSONObject.escape(username)).append("\"");
         sb.append(",");
         sb.append("\"password\"");
         sb.append(":");
-        sb.append("\"" + JSONObject.escape(password) + "\"");
+        sb.append("\"").append(JSONObject.escape(password)).append("\"");
         sb.append("}");
         return sb.toString();
     }   

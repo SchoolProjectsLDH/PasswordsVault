@@ -6,10 +6,12 @@
 package com.theborginc.passwordsvault.GUI;
 
 import com.theborginc.passwordsvault.Auth.*;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.FileReader;
+import java.io.IOException;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 
@@ -27,8 +29,8 @@ public class PasswordsList extends javax.swing.JFrame {
         initComponents();
         try{
             config.resetStrike();
-        }catch(Exception e){
-            e.printStackTrace();
+        }catch(IOException e){
+            System.out.println("Failed to write to configs");
         }
         this.updateTable();
     }
@@ -50,7 +52,7 @@ public class PasswordsList extends javax.swing.JFrame {
             passwords.forEach( emp -> parseObject( (JSONObject) emp ) );
             index = 0;
         } catch (Exception e){
-            e.printStackTrace();
+            System.out.println("Failed to cast as json array");
         }
     }
     
@@ -351,7 +353,7 @@ public class PasswordsList extends javax.swing.JFrame {
             StringSelection stringSelection = new StringSelection(password);
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             clipboard.setContents(stringSelection, null);
-        }catch(Exception e){
+        }catch(HeadlessException e){
             System.out.println("No Account Detected");
         }
     }//GEN-LAST:event_copyAccountActionPerformed

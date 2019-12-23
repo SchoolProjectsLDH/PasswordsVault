@@ -7,15 +7,10 @@ package com.theborginc.passwordsvault.GUI;
 
 import com.theborginc.passwordsvault.Auth.Configs;
 import com.theborginc.passwordsvault.Auth.GoogleAuthMaker;
-import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -262,8 +257,8 @@ public class ChangePassword extends javax.swing.JFrame {
                     weakLabel.setVisible(true);
                 }
             }
-        }catch(Exception e){
-            e.printStackTrace();
+        }catch(IOException e){
+            System.out.println("Could not read data from configs");
         }
     }//GEN-LAST:event_SubmitButtonActionPerformed
 

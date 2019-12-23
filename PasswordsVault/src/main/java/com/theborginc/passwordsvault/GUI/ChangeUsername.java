@@ -227,8 +227,8 @@ public class ChangeUsername extends javax.swing.JFrame {
                 });
                 this.dispose();
             }
-        }catch(Exception e){
-            e.printStackTrace();
+        }catch(IOException e){
+            System.out.println("Could not read data from configs");
         }
     }//GEN-LAST:event_SubmitButtonActionPerformed
 

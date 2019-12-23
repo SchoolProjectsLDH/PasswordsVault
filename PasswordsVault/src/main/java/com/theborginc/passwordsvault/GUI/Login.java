@@ -242,8 +242,8 @@ public class Login extends javax.swing.JFrame {
             }else{
                 config.addStrike();
             }
-        }catch(Exception e){
-            e.printStackTrace();
+        }catch(IOException e){
+            System.out.println("Could not read data from configs.");
         }
     }//GEN-LAST:event_SubmitButtonActionPerformed
 
