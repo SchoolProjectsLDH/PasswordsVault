@@ -69,4 +69,10 @@ public class Configs {
         lines[1] = newPass;
         write(lines);
     }
+    
+    public String getSecretKey() throws IOException{
+        String[] lines = readFile();
+        return lines[4];
+
+    }
 }
