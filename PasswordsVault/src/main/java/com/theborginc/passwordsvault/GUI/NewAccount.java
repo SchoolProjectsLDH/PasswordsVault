@@ -213,14 +213,30 @@ public class NewAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_BackActionPerformed
 
     private boolean checkFilled(){
-        return(!titleField.getText().equals("") && !usernameField.getText().equals("") && !passwordField.getText().equals(""));
+        boolean filled = false;
+        switch(accountTypeBox.getItemAt(accountTypeBox.getSelectedIndex())){
+            case "API Key":
+                filled = (!titleField.getText().equals("") && !passwordField.getText().equals(""));
+                break;
+            case "Phone":
+                filled = (!titleField.getText().equals("") && !passwordField.getText().equals(""));
+                break;
+            default:
+                filled = (!titleField.getText().equals("") && !usernameField.getText().equals("") && !passwordField.getText().equals(""));
+                break;
+        }
+        return filled;
     }
     
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
         DatabaseEditor editor = new DatabaseEditor();
         unfilledParram.setVisible(false);
         if(this.checkFilled()){
-            editor.JsonParse(accountTypeBox.getItemAt(accountTypeBox.getSelectedIndex()), titleField.getText(), usernameField.getText(), passwordField.getText());
+            try {
+                editor.JsonParse(accountTypeBox.getItemAt(accountTypeBox.getSelectedIndex()), titleField.getText(), usernameField.getText(), passwordField.getText());
+            } catch (Exception ex) {
+                System.out.println("Encryption problem");
+            }
             java.awt.EventQueue.invokeLater(() -> {
                 new PasswordsList().setVisible(true);
             });
