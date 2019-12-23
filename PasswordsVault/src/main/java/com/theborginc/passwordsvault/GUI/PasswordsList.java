@@ -248,7 +248,7 @@ public class PasswordsList extends javax.swing.JFrame {
             }
         });
         getContentPane().add(genPass);
-        genPass.setBounds(550, 190, 150, 29);
+        genPass.setBounds(550, 210, 150, 29);
 
         logOut.setText("Logout");
         logOut.addActionListener(new java.awt.event.ActionListener() {
@@ -266,7 +266,7 @@ public class PasswordsList extends javax.swing.JFrame {
             }
         });
         getContentPane().add(copyAccount);
-        copyAccount.setBounds(550, 160, 150, 29);
+        copyAccount.setBounds(550, 180, 150, 29);
 
         changeMasterPass.setText("Change Master Pass");
         changeMasterPass.addActionListener(new java.awt.event.ActionListener() {
@@ -275,7 +275,7 @@ public class PasswordsList extends javax.swing.JFrame {
             }
         });
         getContentPane().add(changeMasterPass);
-        changeMasterPass.setBounds(550, 300, 150, 29);
+        changeMasterPass.setBounds(550, 290, 150, 29);
 
         changeMasterUser.setText("Change Master User");
         changeMasterUser.addActionListener(new java.awt.event.ActionListener() {
@@ -284,7 +284,7 @@ public class PasswordsList extends javax.swing.JFrame {
             }
         });
         getContentPane().add(changeMasterUser);
-        changeMasterUser.setBounds(550, 270, 150, 29);
+        changeMasterUser.setBounds(550, 260, 150, 29);
 
         TitleLabel.setBackground(new java.awt.Color(0, 102, 204));
         TitleLabel.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
