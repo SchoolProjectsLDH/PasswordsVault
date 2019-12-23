@@ -6,7 +6,7 @@ import java.io.IOException;
  *
  * @author keshavgupta
  */
-public class AuthChecker extends javax.swing.JFrame{
+public class AuthChecker {
     private final GoogleAuthMaker gAuth = new GoogleAuthMaker();
     private final Configs config = new Configs();
     
