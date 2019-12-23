@@ -48,7 +48,7 @@ public class Configs {
     
     public void addStrike() throws IOException{
         String[] lines = readFile();
-        lines[3] = String.valueOf(Integer.parseInt(lines[5])+1);
+        lines[3] = String.valueOf(Integer.parseInt(lines[3])+1);
         write(lines);
     }
     
