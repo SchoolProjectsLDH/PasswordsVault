@@ -12,10 +12,10 @@ import java.nio.file.Files;
  */
 public class Configs {
     
-    private static void write(String[] parrameters) throws IOException{
+    private static void write(String[] parameters) throws IOException{
         BufferedWriter outputWriter;
         outputWriter = new BufferedWriter(new FileWriter("./src/main/resources/config.dat"));
-        for (String parrameter : parrameters) {
+        for (String parrameter : parameters) {
             outputWriter.write(parrameter + "");
             outputWriter.newLine();
         }
