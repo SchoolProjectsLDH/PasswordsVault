@@ -1,11 +1,11 @@
 package com.theborginc.passwordsvault.GUI;
 
-import com.theborginc.passwordsvault.Auth.Configs;
-import com.theborginc.passwordsvault.Auth.GoogleAuthMaker;
+import com.theborginc.passwordsvault.Auth.*;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
+import javax.crypto.Cipher;
 
 /**
  *
@@ -24,7 +24,7 @@ public class ChangePassword extends javax.swing.JFrame {
         weakLabel.setVisible(false);
     }
     
-    Configs configs = new Configs();
+    private final static Configs CONFIG = new Configs();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,6 +39,7 @@ public class ChangePassword extends javax.swing.JFrame {
         weakLabel = new javax.swing.JLabel();
         dontMatchLabel = new javax.swing.JLabel();
         Regen2FA = new javax.swing.JButton();
+        cycleEncryptor = new javax.swing.JButton();
         SubmitButton = new javax.swing.JButton();
         Back = new javax.swing.JButton();
         confirmLabel = new javax.swing.JLabel();
@@ -101,7 +102,22 @@ public class ChangePassword extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Regen2FA);
-        Regen2FA.setBounds(30, 280, 130, 30);
+        Regen2FA.setBounds(220, 320, 200, 30);
+
+        cycleEncryptor.setBackground(new java.awt.Color(0, 0, 0));
+        cycleEncryptor.setForeground(new java.awt.Color(255, 255, 255));
+        cycleEncryptor.setText("Cycle Encryptor");
+        cycleEncryptor.setToolTipText("");
+        cycleEncryptor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        cycleEncryptor.setBorderPainted(false);
+        cycleEncryptor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cycleEncryptor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cycleEncryptorActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cycleEncryptor);
+        cycleEncryptor.setBounds(220, 350, 200, 30);
 
         SubmitButton.setBackground(new java.awt.Color(0, 0, 0));
         SubmitButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -214,7 +230,7 @@ public class ChangePassword extends javax.swing.JFrame {
     }//GEN-LAST:event_BackActionPerformed
     
     private boolean updateInvalidFields() throws IOException{
-        if(!String.valueOf(prevPassField.getPassword()).equals(configs.getPassword())){
+        if(!String.valueOf(prevPassField.getPassword()).equals(CONFIG.getPassword())){
             incorrectPassLabel.setVisible(true);
         }
         if(!String.valueOf(newPassField.getPassword()).equals(String.valueOf(confirmPassField.getPassword()))){
@@ -223,7 +239,7 @@ public class ChangePassword extends javax.swing.JFrame {
         if(String.valueOf(newPassField.getPassword()).equals("")){
             requiredLabel.setVisible(true);
         }
-        return (String.valueOf(prevPassField.getPassword()).equals(configs.getPassword()) && String.valueOf(newPassField.getPassword()).equals(String.valueOf(confirmPassField.getPassword())) && (String.valueOf(newPassField.getPassword()).equals("") == false));
+        return (String.valueOf(prevPassField.getPassword()).equals(CONFIG.getPassword()) && String.valueOf(newPassField.getPassword()).equals(String.valueOf(confirmPassField.getPassword())) && (String.valueOf(newPassField.getPassword()).equals("") == false));
     }
     
     private boolean checkStrong(String passwordSelect){
@@ -240,7 +256,7 @@ public class ChangePassword extends javax.swing.JFrame {
             
             if(this.updateInvalidFields()){//if all fields are filled
                 if(this.checkStrong(String.valueOf(newPassField.getPassword()))){//check if the password is strong
-                    configs.setPassword(String.valueOf(newPassField.getPassword()));//set password
+                    CONFIG.setPassword(String.valueOf(newPassField.getPassword()));//set password
                     java.awt.EventQueue.invokeLater(() -> {//back to passwordslist
                         new PasswordsList().setVisible(true);
                     });
@@ -266,6 +282,18 @@ public class ChangePassword extends javax.swing.JFrame {
             System.out.println("Write Error");
         }
     }//GEN-LAST:event_Regen2FAActionPerformed
+
+    private void cycleEncryptorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cycleEncryptorActionPerformed
+        EncryptDecrypt editor = new EncryptDecrypt();
+        try {
+            editor.encrypt(CONFIG.getSecretKey(), Cipher.DECRYPT_MODE, "./src/main/resources/passwords.txt", "./src/main/resources/passwords.json");
+            CONFIG.newSecretKey();
+            editor.encrypt(CONFIG.getSecretKey(), Cipher.ENCRYPT_MODE, "./src/main/resources/passwords.json", "./src/main/resources/passwords.txt");
+            editor.clear();
+        } catch (Exception e) {
+            System.out.println("Failed cycling");
+        }
+    }//GEN-LAST:event_cycleEncryptorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,6 +338,7 @@ public class ChangePassword extends javax.swing.JFrame {
     private javax.swing.JLabel TitleLabel;
     private javax.swing.JLabel confirmLabel;
     private javax.swing.JPasswordField confirmPassField;
+    private javax.swing.JButton cycleEncryptor;
     private javax.swing.JLabel dontMatchLabel;
     private javax.swing.JLabel incorrectPassLabel;
     private javax.swing.JPasswordField newPassField;

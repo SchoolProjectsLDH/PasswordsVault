@@ -69,6 +69,18 @@ public class Configs {
     public String getSecretKey() throws IOException{//get key for encryptor
         String[] lines = readFile();
         return lines[4];//return key as string
-
+    }
+    
+    public void newSecretKey() throws IOException{
+        String[] lines = readFile();
+        PasswordGenerator passwordGenerator = new PasswordGenerator.PasswordGeneratorBuilder()//make a password builder
+            .useNumbers(true)//Give parameters from toggle buttons
+            .useLowerCase(true)
+            .useUpperCase(true)
+            .useBasicSymbols(false)
+            .useAdvSymbols(false)
+            .build();
+        lines[4] = passwordGenerator.generate(8);
+        write(lines);
     }
 }
