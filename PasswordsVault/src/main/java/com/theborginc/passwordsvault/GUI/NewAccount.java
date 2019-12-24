@@ -246,9 +246,11 @@ public class NewAccount extends javax.swing.JFrame {
         switch(accountTypeBox.getItemAt(accountTypeBox.getSelectedIndex())){//when account type changes update field visibility
             case "API Key":
                 usernameField.setVisible(false);
+                usernameField.setText("");
                 break;
             case "Phone":
                 usernameField.setVisible(false);
+                usernameField.setText("");
                 break;
             default:
                 usernameField.setVisible(true);
