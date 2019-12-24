@@ -10,7 +10,8 @@ This repository contains the code for the PasswordsVault.
 5. Generate a new Google authenticator code in the change master password window
 6. Paste the generated url to a browser and scan the QR code
 7. Delete the default 2FA QR code you scanned above
-8. Done!
+8. Cycle the encryption key (you can do this as many times and whenever you want)
+9. Done!
 
 # Planning
 
