@@ -22,6 +22,7 @@ public class EncryptDecrypt {
     public void encrypt(String key, int mode, String inPath, String outPath) throws Exception{
         File input = new File(inPath);
         File output = new File(outPath);
+        
         FileInputStream fileInputStream = new FileInputStream(input);
         FileOutputStream fileOutputStream = new FileOutputStream(output);
         
@@ -43,6 +44,8 @@ public class EncryptDecrypt {
                 CipherOutputStream cipherOutputStream = new CipherOutputStream(fileOutputStream, cipher);
                 write(fileInputStream, cipherOutputStream);
                 break;
+            default:
+                System.out.println("Invalid selection received");
         }
     }
     
@@ -55,9 +58,11 @@ public class EncryptDecrypt {
     private static void write(InputStream input, OutputStream output) throws IOException{
         byte[] buffer = new byte[64];
         int numBytesRead;
+        
         while((numBytesRead = input.read(buffer)) != -1){
             output.write(buffer, 0, numBytesRead);
         }
+        
         input.close();
         output.close();
     }
