@@ -204,14 +204,14 @@ public class ChangeUsername extends javax.swing.JFrame {
     }//GEN-LAST:event_confirmUserFieldActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-        java.awt.EventQueue.invokeLater(() -> {
+        java.awt.EventQueue.invokeLater(() -> {//go to passwords list window
             new PasswordsList().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_BackActionPerformed
     
-    private void updateInvalidFields() throws IOException{
-        if(!prevUserField.getText().equals(CONFIG.getUsername())){
+    private boolean updateInvalidFields() throws IOException{
+        if(!prevUserField.getText().equals(CONFIG.getUsername())){//geck field values against config values and the other fields
             incorrectUserLabel.setVisible(true);
         }
         if(!newUserField.getText().equals(confirmUserField.getText())){
@@ -220,18 +220,18 @@ public class ChangeUsername extends javax.swing.JFrame {
         if(newUserField.getText().equals("")){
             requiredLabel.setVisible(true);
         }
+        return (prevUserField.getText().equals(CONFIG.getUsername()) && newUserField.getText().equals(confirmUserField.getText()) && !newUserField.getText().equals(""));
     }
     
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
         try{
-            incorrectUserLabel.setVisible(false);
+            incorrectUserLabel.setVisible(false);//Reset alert labels
             dontMatchLabel.setVisible(false);
             requiredLabel.setVisible(false);
             
-            this.updateInvalidFields();
-            if(prevUserField.getText().equals(CONFIG.getUsername()) && newUserField.getText().equals(confirmUserField.getText()) && !newUserField.getText().equals("")){
-                CONFIG.setUsername(newUserField.getText());
-                java.awt.EventQueue.invokeLater(() -> {
+            if(this.updateInvalidFields()){//if all are properly filled
+                CONFIG.setUsername(newUserField.getText());//set the username as given field
+                java.awt.EventQueue.invokeLater(() -> {//back to passwords list
                     new PasswordsList().setVisible(true);
                 });
                 this.dispose();
