@@ -46,6 +46,7 @@ public class EncryptDecrypt {
                 break;
             default:
                 System.out.println("Invalid selection received");
+                break;
         }
     }
     
