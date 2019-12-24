@@ -7,13 +7,13 @@ import java.io.IOException;
  * @author keshavgupta
  */
 public class Login extends javax.swing.JFrame {
-    private static final Configs CONFIG = new Configs();
+    private static final Configs CONFIG = new Configs();//Config file reader
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
-        Invalid2FA.setVisible(false);
+        Invalid2FA.setVisible(false);//The Alert labels start as invisible
         InvalidPass.setVisible(false);
         InvalidUser.setVisible(false);
         lockedOutLabel.setVisible(false);
@@ -221,44 +221,43 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TwoFAFieldActionPerformed
     
-    private void updateInvalidFields() throws IOException{
-        AuthChecker auth = new AuthChecker();
-        if(!UsernameField.getText().equals(CONFIG.getUsername())){
-            InvalidUser.setVisible(true);
+    private boolean updateInvalidFields() throws IOException{
+        AuthChecker auth = new AuthChecker();//Auth object check against real username and password
+        if(!UsernameField.getText().equals(CONFIG.getUsername())){//If incorrect username
+            InvalidUser.setVisible(true);//Alert
         }
-        if(!String.valueOf(PasswordField.getPassword()).equals(CONFIG.getPassword())){
-            InvalidPass.setVisible(true);
+        if(!String.valueOf(PasswordField.getPassword()).equals(CONFIG.getPassword())){//If incorrect password
+            InvalidPass.setVisible(true);//Alert
         }
-        if(!TwoFAField.getText().equals(auth.getTFact())){
-            Invalid2FA.setVisible(true);
+        if(!TwoFAField.getText().equals(auth.getTFact())){//If incorrect 2FA code
+            Invalid2FA.setVisible(true);//alert
         }
-        if(CONFIG.getStrikes() >=5){
-            lockedOutLabel.setVisible(true);
+        if(CONFIG.getStrikes() >=5){//if too many strikes
+            lockedOutLabel.setVisible(true);//Lock out alert
         }
+        return (auth.compareValues(UsernameField.getText(), String.valueOf(PasswordField.getPassword()), TwoFAField.getText()) && CONFIG.getStrikes() <= 5);
     }
     
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
         try{
-            AuthChecker auth = new AuthChecker();
-            Invalid2FA.setVisible(false);
+            Invalid2FA.setVisible(false);//Reset invalid alerts
             InvalidPass.setVisible(false);
             InvalidUser.setVisible(false);
-            this.updateInvalidFields();
-            if(auth.compareValues(UsernameField.getText(), String.valueOf(PasswordField.getPassword()), TwoFAField.getText()) && CONFIG.getStrikes() <= 5){
-                java.awt.EventQueue.invokeLater(() -> {
+            if(this.updateInvalidFields()){//if all values are correct
+                java.awt.EventQueue.invokeLater(() -> {//go to passwords list
                     new PasswordsList().setVisible(true);
                 });
                 this.dispose();
             }else{
-                CONFIG.addStrike();
+                CONFIG.addStrike();//If incorrect add to strikes
             }
         }catch(IOException e){
-            System.out.println("Could not read data from configs.");
+            System.out.println("Could not read data from configs.");//IO config error
         }
     }//GEN-LAST:event_SubmitButtonActionPerformed
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
-        System.exit(0);
+        System.exit(0);//Exit
     }//GEN-LAST:event_ExitActionPerformed
 
     /**
