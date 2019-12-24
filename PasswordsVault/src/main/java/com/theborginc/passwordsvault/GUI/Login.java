@@ -40,6 +40,8 @@ public class Login extends javax.swing.JFrame {
         UsernameLabel = new javax.swing.JLabel();
         TwoFALabel = new javax.swing.JLabel();
         TwoFAField = new javax.swing.JTextField();
+        Logo = new javax.swing.JLabel();
+        cubecube = new javax.swing.JLabel();
         TitleLabel = new javax.swing.JLabel();
         BackTitleImg = new javax.swing.JLabel();
         Background = new javax.swing.JLabel();
@@ -89,7 +91,7 @@ public class Login extends javax.swing.JFrame {
         lockedOutLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lockedOutLabel.setText("You Have Been Locked Out");
         getContentPane().add(lockedOutLabel);
-        lockedOutLabel.setBounds(140, 330, 270, 43);
+        lockedOutLabel.setBounds(150, 320, 270, 43);
 
         InvalidPass.setBackground(new java.awt.Color(0, 102, 204));
         InvalidPass.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
@@ -175,13 +177,25 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(TwoFAField);
         TwoFAField.setBounds(170, 240, 220, 50);
 
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
+        getContentPane().add(Logo);
+        Logo.setBounds(10, 0, 100, 100);
+
+        cubecube.setBackground(new java.awt.Color(0, 102, 204));
+        cubecube.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
+        cubecube.setForeground(new java.awt.Color(255, 255, 255));
+        cubecube.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cubecube.setText("Cube³");
+        getContentPane().add(cubecube);
+        cubecube.setBounds(10, 90, 100, 43);
+
         TitleLabel.setBackground(new java.awt.Color(0, 102, 204));
         TitleLabel.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
         TitleLabel.setForeground(new java.awt.Color(255, 255, 255));
         TitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TitleLabel.setText("Passwords Vault");
         getContentPane().add(TitleLabel);
-        TitleLabel.setBounds(0, 30, 600, 43);
+        TitleLabel.setBounds(0, 30, 610, 43);
 
         BackTitleImg.setBackground(new java.awt.Color(0, 102, 204));
         BackTitleImg.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
@@ -286,6 +300,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel Invalid2FA;
     private javax.swing.JLabel InvalidPass;
     private javax.swing.JLabel InvalidUser;
+    private javax.swing.JLabel Logo;
     private javax.swing.JLabel PassLabel;
     private javax.swing.JPasswordField PasswordField;
     private javax.swing.JButton SubmitButton;
@@ -294,6 +309,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel TwoFALabel;
     private javax.swing.JTextField UsernameField;
     private javax.swing.JLabel UsernameLabel;
+    private javax.swing.JLabel cubecube;
     private javax.swing.JLabel lockedOutLabel;
     // End of variables declaration//GEN-END:variables
 }
