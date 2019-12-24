@@ -213,7 +213,7 @@ public class ChangePassword extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BackActionPerformed
     
-    private void updateInvalidFields() throws IOException{
+    private boolean updateInvalidFields() throws IOException{
         if(!String.valueOf(prevPassField.getPassword()).equals(configs.getPassword())){
             incorrectPassLabel.setVisible(true);
         }
@@ -223,15 +223,12 @@ public class ChangePassword extends javax.swing.JFrame {
         if(String.valueOf(newPassField.getPassword()).equals("")){
             requiredLabel.setVisible(true);
         }
-    }
-    
-    private boolean sendValid() throws IOException{
         return (String.valueOf(prevPassField.getPassword()).equals(configs.getPassword()) && String.valueOf(newPassField.getPassword()).equals(String.valueOf(confirmPassField.getPassword())) && (String.valueOf(newPassField.getPassword()).equals("") == false));
     }
     
-    private boolean checkStrong(){
-        String passwordSelect = String.valueOf(newPassField.getPassword());
+    private boolean checkStrong(String passwordSelect){
         return(passwordSelect.matches(".*\\d.*") && passwordSelect.matches("(?s).*[A-Z].*") && passwordSelect.matches(".*\\W.*"));
+        //Contains a number, symbol, capital letter, lowercase letter
     }
     
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
@@ -241,16 +238,15 @@ public class ChangePassword extends javax.swing.JFrame {
             requiredLabel.setVisible(false);
             weakLabel.setVisible(false);
             
-            this.updateInvalidFields();
-            if(this.sendValid()){
-                if(this.checkStrong()){
-                    configs.setPassword(String.valueOf(newPassField.getPassword()));
-                    java.awt.EventQueue.invokeLater(() -> {
+            if(this.updateInvalidFields()){//if all fields are filled
+                if(this.checkStrong(String.valueOf(newPassField.getPassword()))){//check if the password is strong
+                    configs.setPassword(String.valueOf(newPassField.getPassword()));//set password
+                    java.awt.EventQueue.invokeLater(() -> {//back to passwordslist
                         new PasswordsList().setVisible(true);
                     });
                     this.dispose();
-                }else{
-                    weakLabel.setVisible(true);
+                }else{//if not strong
+                    weakLabel.setVisible(true);//weak alert
                 }
             }
         }catch(IOException e){
@@ -259,13 +255,13 @@ public class ChangePassword extends javax.swing.JFrame {
     }//GEN-LAST:event_SubmitButtonActionPerformed
 
     private void Regen2FAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Regen2FAActionPerformed
-        GoogleAuthMaker twoFAMaker = new GoogleAuthMaker();
+        GoogleAuthMaker twoFAMaker = new GoogleAuthMaker();//generate 2fa code object
         
         try {
-            StringSelection stringSelection = new StringSelection(twoFAMaker.newCode());
+            StringSelection stringSelection = new StringSelection(twoFAMaker.newCode());//copy the new generated code to clipboard
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             clipboard.setContents(stringSelection, null);
-            Regen2FA.setText("Paste To Browser");
+            Regen2FA.setText("Paste To Browser");//tell user to past the qr code url to browser
         } catch (IOException e) {
             System.out.println("Write Error");
         }
