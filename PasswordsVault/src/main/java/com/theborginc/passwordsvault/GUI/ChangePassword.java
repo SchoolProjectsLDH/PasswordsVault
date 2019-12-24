@@ -240,6 +240,7 @@ public class ChangePassword extends javax.swing.JFrame {
             dontMatchLabel.setVisible(false);
             requiredLabel.setVisible(false);
             weakLabel.setVisible(false);
+            
             this.updateInvalidFields();
             if(this.sendValid()){
                 if(this.checkStrong()){
@@ -259,6 +260,7 @@ public class ChangePassword extends javax.swing.JFrame {
 
     private void Regen2FAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Regen2FAActionPerformed
         GoogleAuthMaker twoFAMaker = new GoogleAuthMaker();
+        
         try {
             StringSelection stringSelection = new StringSelection(twoFAMaker.newCode());
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
