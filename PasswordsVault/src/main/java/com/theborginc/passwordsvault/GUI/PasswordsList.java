@@ -15,51 +15,51 @@ import org.json.simple.parser.JSONParser;
  * @author keshavgupta
  */
 public class PasswordsList extends javax.swing.JFrame {
-    int index = 0;
-    private final Configs config = new Configs();
+    int index = 0;//Counter for writing the table rows
+    private static final Configs CONFIG = new Configs();//config readers
     /**
      * Creates new form PasswordsList
      */
     public PasswordsList() {
         initComponents();
         try{
-            config.resetStrike();
-            this.updateTable();
+            CONFIG.resetStrike();//set strikes as 0
+            this.updateTable();//place passwords to table
         }catch(Exception e){
-            System.out.println("Failed to write to configs");
+            System.out.println("Failed to write to configs");//IO error or cipher error
         }
     }
     
     private void updateTable() throws Exception {
-        JSONParser jsonParser = new JSONParser();
-        JSONArray passwords;
+        JSONParser jsonParser = new JSONParser();//Reading json
+        JSONArray passwords;//array of json passwords
         
-        for(int i = 0; i < 100;i++){
+        for(int i = 0; i < 100;i++){//reset directory table
             directoryTable.setValueAt("", i, 0);
             directoryTable.setValueAt("", i, 1);
             directoryTable.setValueAt("", i, 2);
             directoryTable.setValueAt("", i, 3);
         }
-        EncryptDecrypt cipherHandler = new EncryptDecrypt();
-        cipherHandler.encrypt(config.getSecretKey(), Cipher.DECRYPT_MODE, "./src/main/resources/passwords.txt", "./src/main/resources/passwords.json");
-        try (FileReader reader = new FileReader("./src/main/resources/passwords.json")){
+        EncryptDecrypt cipherHandler = new EncryptDecrypt();//encryption object
+        cipherHandler.encrypt(CONFIG.getSecretKey(), Cipher.DECRYPT_MODE, "./src/main/resources/passwords.txt", "./src/main/resources/passwords.json");//decrypt file
+        try (FileReader reader = new FileReader("./src/main/resources/passwords.json")){//read lines of file
             //Read JSON file
-            Object obj = jsonParser.parse(reader);
-            passwords = (JSONArray) obj;
-            passwords.forEach( emp -> parseObject( (JSONObject) emp ) );
-            index = 0;
-            cipherHandler.clear();
+            Object obj = jsonParser.parse(reader);//cast as json obj
+            passwords = (JSONArray) obj;//cast as json array
+            passwords.forEach( emp -> parseObject( (JSONObject) emp ) );//for every json object place it in a table row
+            index = 0;//reset index
+            cipherHandler.clear();//delete content of json file 
         } catch (Exception e){
             System.out.println("Failed to cast as json array");
         }
     }
     
     private void parseObject(JSONObject passwords){
-        directoryTable.setValueAt(passwords.get("account"), index, 0);//get scores in score field set to row and collumn
+        directoryTable.setValueAt(passwords.get("account"), index, 0);//place values to row
         directoryTable.setValueAt(passwords.get("title"), index, 1);
         directoryTable.setValueAt(passwords.get("username"), index, 2);
         directoryTable.setValueAt(passwords.get("password"), index, 3);
-        index++;
+        index++;//next row
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -311,35 +311,35 @@ public class PasswordsList extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddAccountActionPerformed
-        java.awt.EventQueue.invokeLater(() -> {
+        java.awt.EventQueue.invokeLater(() -> {//Go to new acc window
             new NewAccount().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_AddAccountActionPerformed
 
     private void logOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutActionPerformed
-        java.awt.EventQueue.invokeLater(() -> {
+        java.awt.EventQueue.invokeLater(() -> {//Login window
             new Login().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_logOutActionPerformed
 
     private void changeMasterUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeMasterUserActionPerformed
-        java.awt.EventQueue.invokeLater(() -> {
+        java.awt.EventQueue.invokeLater(() -> {//change username window
             new ChangeUsername().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_changeMasterUserActionPerformed
 
     private void changeMasterPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeMasterPassActionPerformed
-        java.awt.EventQueue.invokeLater(() -> {
+        java.awt.EventQueue.invokeLater(() -> {//change password window
             new ChangePassword().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_changeMasterPassActionPerformed
 
     private void genPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genPassActionPerformed
-        java.awt.EventQueue.invokeLater(() -> {
+        java.awt.EventQueue.invokeLater(() -> {//generate password window
             new GenPass().setVisible(true);
         });
         this.dispose();
@@ -347,24 +347,24 @@ public class PasswordsList extends javax.swing.JFrame {
 
     private void copyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyAccountActionPerformed
         try{
-            String password = (String) directoryTable.getValueAt(directoryTable.getSelectedRow(), 3);
-            StringSelection stringSelection = new StringSelection(password);
+            String password = (String) directoryTable.getValueAt(directoryTable.getSelectedRow(), 3);//get the password at the selected row in collumn 4
+            StringSelection stringSelection = new StringSelection(password);//send to clipboard
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             clipboard.setContents(stringSelection, null);
         }catch(HeadlessException e){
-            System.out.println("No Account Detected");
+            System.out.println("No Account Detected");//No selection
         }catch(ArrayIndexOutOfBoundsException e){
-            System.out.println("Table Empty");
+            System.out.println("Table Empty");//table is empty 
         }
     }//GEN-LAST:event_copyAccountActionPerformed
 
     private void DeleteAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteAccountActionPerformed
-        DatabaseEditor editor = new DatabaseEditor();
+        DatabaseEditor editor = new DatabaseEditor();//edit json array
         try{
-            editor.removeAccount(directoryTable.getSelectedRow());
-            this.updateTable();
+            editor.removeAccount(directoryTable.getSelectedRow());//get the row and run remove account method
+            this.updateTable();//redraw table
         }catch(Exception e){
-            System.out.println("Deletion Failed due to invalid selection.");
+            System.out.println("Deletion Failed due to invalid selection.");//In case of invalid selection
         }
     }//GEN-LAST:event_DeleteAccountActionPerformed
 
