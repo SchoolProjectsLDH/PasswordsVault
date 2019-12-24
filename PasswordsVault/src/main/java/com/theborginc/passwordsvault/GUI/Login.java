@@ -7,7 +7,7 @@ import java.io.IOException;
  * @author keshavgupta
  */
 public class Login extends javax.swing.JFrame {
-    private final Configs config = new Configs();
+    private static final Configs CONFIG = new Configs();
     /**
      * Creates new form Login
      */
@@ -209,16 +209,16 @@ public class Login extends javax.swing.JFrame {
     
     private void updateInvalidFields() throws IOException{
         AuthChecker auth = new AuthChecker();
-        if(!UsernameField.getText().equals(config.getUsername())){
+        if(!UsernameField.getText().equals(CONFIG.getUsername())){
             InvalidUser.setVisible(true);
         }
-        if(!String.valueOf(PasswordField.getPassword()).equals(config.getPassword())){
+        if(!String.valueOf(PasswordField.getPassword()).equals(CONFIG.getPassword())){
             InvalidPass.setVisible(true);
         }
         if(!TwoFAField.getText().equals(auth.getTFact())){
             Invalid2FA.setVisible(true);
         }
-        if(config.getStrikes() >=5){
+        if(CONFIG.getStrikes() >=5){
             lockedOutLabel.setVisible(true);
         }
     }
@@ -230,13 +230,13 @@ public class Login extends javax.swing.JFrame {
             InvalidPass.setVisible(false);
             InvalidUser.setVisible(false);
             this.updateInvalidFields();
-            if(auth.compareValues(UsernameField.getText(), String.valueOf(PasswordField.getPassword()), TwoFAField.getText()) && config.getStrikes() <= 5){
+            if(auth.compareValues(UsernameField.getText(), String.valueOf(PasswordField.getPassword()), TwoFAField.getText()) && CONFIG.getStrikes() <= 5){
                 java.awt.EventQueue.invokeLater(() -> {
                     new PasswordsList().setVisible(true);
                 });
                 this.dispose();
             }else{
-                config.addStrike();
+                CONFIG.addStrike();
             }
         }catch(IOException e){
             System.out.println("Could not read data from configs.");

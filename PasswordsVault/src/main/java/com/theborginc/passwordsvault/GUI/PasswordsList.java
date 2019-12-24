@@ -30,12 +30,12 @@ public class PasswordsList extends javax.swing.JFrame {
         }
     }
     
-    private void updateTable() throws Exception {//update table using json
+    private void updateTable() throws Exception {
         JSONParser jsonParser = new JSONParser();
         JSONArray passwords;
         
         for(int i = 0; i < 100;i++){
-            directoryTable.setValueAt("", i, 0);//get scores in score field set to row and collumn
+            directoryTable.setValueAt("", i, 0);
             directoryTable.setValueAt("", i, 1);
             directoryTable.setValueAt("", i, 2);
             directoryTable.setValueAt("", i, 3);

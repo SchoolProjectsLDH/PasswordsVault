@@ -8,7 +8,7 @@ import java.io.IOException;
  * @author keshavgupta
  */
 public class ChangeUsername extends javax.swing.JFrame {
-
+    private static final Configs CONFIG = new Configs();
     /**
      * Creates new form ChangeUsername
      */
@@ -19,7 +19,6 @@ public class ChangeUsername extends javax.swing.JFrame {
         requiredLabel.setVisible(false);
     }
     
-    Configs configs = new Configs();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -212,7 +211,7 @@ public class ChangeUsername extends javax.swing.JFrame {
     }//GEN-LAST:event_BackActionPerformed
     
     private void updateInvalidFields() throws IOException{
-        if(!prevUserField.getText().equals(configs.getUsername())){
+        if(!prevUserField.getText().equals(CONFIG.getUsername())){
             incorrectUserLabel.setVisible(true);
         }
         if(!newUserField.getText().equals(confirmUserField.getText())){
@@ -228,9 +227,10 @@ public class ChangeUsername extends javax.swing.JFrame {
             incorrectUserLabel.setVisible(false);
             dontMatchLabel.setVisible(false);
             requiredLabel.setVisible(false);
+            
             this.updateInvalidFields();
-            if(prevUserField.getText().equals(configs.getUsername()) && newUserField.getText().equals(confirmUserField.getText()) && !newUserField.getText().equals("")){
-                configs.setUsername(newUserField.getText());
+            if(prevUserField.getText().equals(CONFIG.getUsername()) && newUserField.getText().equals(confirmUserField.getText()) && !newUserField.getText().equals("")){
+                CONFIG.setUsername(newUserField.getText());
                 java.awt.EventQueue.invokeLater(() -> {
                     new PasswordsList().setVisible(true);
                 });

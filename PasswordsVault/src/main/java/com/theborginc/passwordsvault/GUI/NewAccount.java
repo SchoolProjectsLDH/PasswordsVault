@@ -208,7 +208,7 @@ public class NewAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_BackActionPerformed
 
     private boolean checkFilled(){
-        boolean filled = false;
+        boolean filled;
         switch(accountTypeBox.getItemAt(accountTypeBox.getSelectedIndex())){
             case "API Key":
                 filled = (!titleField.getText().equals("") && !passwordField.getText().equals(""));
@@ -229,9 +229,10 @@ public class NewAccount extends javax.swing.JFrame {
         if(this.checkFilled()){
             try {
                 editor.JsonParse(accountTypeBox.getItemAt(accountTypeBox.getSelectedIndex()), titleField.getText(), usernameField.getText(), passwordField.getText());
-            } catch (Exception ex) {
+            } catch (Exception e) {
                 System.out.println("Encryption problem");
             }
+            
             java.awt.EventQueue.invokeLater(() -> {
                 new PasswordsList().setVisible(true);
             });
