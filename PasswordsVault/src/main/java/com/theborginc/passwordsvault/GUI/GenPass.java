@@ -179,29 +179,29 @@ public class GenPass extends javax.swing.JFrame {
     }//GEN-LAST:event_numbersSelectActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-        java.awt.EventQueue.invokeLater(() -> {
+        java.awt.EventQueue.invokeLater(() -> {//go to password lsit window
             new PasswordsList().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_BackActionPerformed
 
     private void copyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyButtonActionPerformed
-        StringSelection stringSelection = new StringSelection(generatedPass.getText());
+        StringSelection stringSelection = new StringSelection(generatedPass.getText());//send the generated pass to clipboard
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(stringSelection, null);
-        copiedFeedback.setVisible(true);
+        copiedFeedback.setVisible(true);//send feedback 
     }//GEN-LAST:event_copyButtonActionPerformed
 
     private void generatePassButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generatePassButtonActionPerformed
         try{
-            PasswordGenerator passwordGenerator = new PasswordGenerator.PasswordGeneratorBuilder()
-            .useNumbers(numbersSelect.isSelected())
+            PasswordGenerator passwordGenerator = new PasswordGenerator.PasswordGeneratorBuilder()//m,ake a password builder
+            .useNumbers(numbersSelect.isSelected())//Give parameters from toggle buttons
             .useLowerCase(lowercaseSelect.isSelected())
             .useUpperCase(capitalsSelect.isSelected())
             .useBasicSymbols(basicSymbolSelect.isSelected())
             .useAdvSymbols(advSymbolSelect.isSelected())
             .build();
-            generatedPass.setText(passwordGenerator.generate((Integer)lengthSpinner.getValue()));
+            generatedPass.setText(passwordGenerator.generate((Integer)lengthSpinner.getValue()));//generate password using length in text box
         }catch(Exception e){
             generatedPass.setText("Invalid Selection");
         }
