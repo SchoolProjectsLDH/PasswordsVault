@@ -13,7 +13,7 @@ public class NewAccount extends javax.swing.JFrame {
      */
     public NewAccount() {
         initComponents();
-        unfilledParram.setVisible(false);
+        unfilledParram.setVisible(false);//init visibility of alert
     }
 
     /**
@@ -201,22 +201,22 @@ public class NewAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_titleFieldActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-        java.awt.EventQueue.invokeLater(() -> {
+        java.awt.EventQueue.invokeLater(() -> {//passwords list window
             new PasswordsList().setVisible(true);
         });
         this.dispose();
     }//GEN-LAST:event_BackActionPerformed
 
     private boolean checkFilled(){
-        boolean filled;
-        switch(accountTypeBox.getItemAt(accountTypeBox.getSelectedIndex())){
-            case "API Key":
+        boolean filled;//stores whether the values are filled or not
+        switch(accountTypeBox.getItemAt(accountTypeBox.getSelectedIndex())){//get the account type
+            case "API Key"://api key does not check username field
                 filled = (!titleField.getText().equals("") && !passwordField.getText().equals(""));
                 break;
-            case "Phone":
+            case "Phone"://phone does not check username field
                 filled = (!titleField.getText().equals("") && !passwordField.getText().equals(""));
                 break;
-            default:
+            default://all other values check all fields
                 filled = (!titleField.getText().equals("") && !usernameField.getText().equals("") && !passwordField.getText().equals(""));
                 break;
         }
@@ -226,24 +226,24 @@ public class NewAccount extends javax.swing.JFrame {
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
         DatabaseEditor editor = new DatabaseEditor();
         unfilledParram.setVisible(false);
-        if(this.checkFilled()){
+        if(this.checkFilled()){//if all are properly filled
             try {
-                editor.JsonParse(accountTypeBox.getItemAt(accountTypeBox.getSelectedIndex()), titleField.getText(), usernameField.getText(), passwordField.getText());
+                editor.JsonParse(accountTypeBox.getItemAt(accountTypeBox.getSelectedIndex()), titleField.getText(), usernameField.getText(), passwordField.getText());//add parameters to json file
             } catch (Exception e) {
                 System.out.println("Encryption problem");
             }
             
-            java.awt.EventQueue.invokeLater(() -> {
+            java.awt.EventQueue.invokeLater(() -> {//go to passwords list
                 new PasswordsList().setVisible(true);
             });
             this.dispose();
         }else{
-            unfilledParram.setVisible(true);
+            unfilledParram.setVisible(true);//if incorrectly filled alert
         }
     }//GEN-LAST:event_SubmitButtonActionPerformed
 
     private void accountTypeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountTypeBoxActionPerformed
-        switch(accountTypeBox.getItemAt(accountTypeBox.getSelectedIndex())){
+        switch(accountTypeBox.getItemAt(accountTypeBox.getSelectedIndex())){//when account type changes update field visibility
             case "API Key":
                 usernameField.setVisible(false);
                 break;
