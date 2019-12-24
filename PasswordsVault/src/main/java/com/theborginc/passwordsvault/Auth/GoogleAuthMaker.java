@@ -13,35 +13,36 @@ import java.security.GeneralSecurityException;
  * @author keshavgupta
  */
 public class GoogleAuthMaker {
-    private static final String CONFIG_FILE = "./src/main/resources/config.dat";
-    private static void write(String[] parrameters) throws IOException{
+    private static final String CONFIG_FILE = "./src/main/resources/config.dat";//config path
+    
+    private static void write(String[] parameters) throws IOException{//write array to lines
         BufferedWriter outputWriter;
-        outputWriter = new BufferedWriter(new FileWriter(CONFIG_FILE));
-        for (String parrameter : parrameters) {
-            outputWriter.write(parrameter + "");
+        outputWriter = new BufferedWriter(new FileWriter(CONFIG_FILE));//write to config file
+        for (String parameter : parameters) {//for each parameter 
+            outputWriter.write(parameter + "");//write to individual line
             outputWriter.newLine();
         }
-        outputWriter.flush();  
+        outputWriter.flush();//close writer
         outputWriter.close();  
     }
     
-    public String getCode() throws IOException{
-        String[] lines = Files.readAllLines(new File(CONFIG_FILE).toPath()).toArray(new String[0]);
+    public String getCode() throws IOException{//get 2fa code from config
+        String[] lines = Files.readAllLines(new File(CONFIG_FILE).toPath()).toArray(new String[0]);//read lines to array
         try{
-            String code = TimeBasedOneTimePasswordUtil.generateCurrentNumberString(lines[2]);
+            String code = TimeBasedOneTimePasswordUtil.generateCurrentNumberString(lines[2]);//get the 6digit code from the 32bithash
             return code;
         }catch(GeneralSecurityException e){
             System.out.println("Err");
         }
-        return "NAN";
+        return "NAN";//invalid code
     }
     
-    public String newCode() throws IOException{
-        String[] lines = Files.readAllLines(new File(CONFIG_FILE).toPath()).toArray(new String[0]);
-        String base32Secret = TimeBasedOneTimePasswordUtil.generateBase32Secret();
-        lines[2] = base32Secret;
-        write(lines);
-        return TimeBasedOneTimePasswordUtil.qrImageUrl("PasswordsVault", base32Secret);
+    public String newCode() throws IOException{//Generate new code
+        String[] lines = Files.readAllLines(new File(CONFIG_FILE).toPath()).toArray(new String[0]);//read all values in config
+        String base32Secret = TimeBasedOneTimePasswordUtil.generateBase32Secret();//new 32bithash from generator
+        lines[2] = base32Secret;//set new hash in array
+        write(lines);//update file
+        return TimeBasedOneTimePasswordUtil.qrImageUrl("PasswordsVault", base32Secret);//return the qr code url
     }
     
 }
