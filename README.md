@@ -1,6 +1,17 @@
 # PasswordsVault
 This repository contains the code for the PasswordsVault.
 
+# How to download and use the application
+1. Download the project
+2. Scan the QR Code below (the default 2FA code) in google authenticator
+[![Default QR Code](https://i.gyazo.com/5769b1b018f9574b9e2cd12bb969c7a5.png)](https://gyazo.com/5769b1b018f9574b9e2cd12bb969c7a5)
+3. Run the application and enter the default username and password (username, password) and the 6 digit code from the google authenticator hash
+4. Change master password and username to something you will remember
+5. Generate a new Google authenticator code in the change master password window
+6. Paste the generated url to a browser and scan the QR code
+7. Delete the default 2FA QR code you scanned above
+8. Done!
+
 # Planning
 
 ## NOTE:
