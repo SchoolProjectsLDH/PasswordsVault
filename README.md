@@ -28,7 +28,7 @@ This repository contains the code for the PasswordsVault.
 - Integration with google apps and OAuth 2.0
 - Learning maven
 
-## RULES/GAME MECHANICS:
+## MECHANICS:
 - Login page
 - Google Auth with 2FA
   - 6 digit number that you need to get
