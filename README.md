@@ -47,7 +47,7 @@ This repository contains the code for the PasswordsVault.
 - Regenerate API keys automatically if possible
 
 ## FLOWCHART
-[![Flowchart](https://i.gyazo.com/631b02f44389a96b196f85b65a9a5b8a.png)](https://gyazo.com/631b02f44389a96b196f85b65a9a5b8a)
+[![Flowchart](https://i.gyazo.com/077941b1700c283645bb4713bb8f15fc.png)](https://gyazo.com/077941b1700c283645bb4713bb8f15fc)
 
 ## UML DIAGRAMS
 All UML diagrams for crucial classes below. They are subject to change as we refine our plan.
