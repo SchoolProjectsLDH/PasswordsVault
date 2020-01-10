@@ -5,8 +5,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.security.GeneralSecurityException;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -37,12 +39,14 @@ public class GoogleAuthMaker {
         return "NAN";//invalid code
     }
     
-    public String newCode() throws IOException{//Generate new code
+    public ImageIcon newCode() throws IOException{//Generate new code
         String[] lines = Files.readAllLines(new File(CONFIG_FILE).toPath()).toArray(new String[0]);//read all values in config
         String base32Secret = TimeBasedOneTimePasswordUtil.generateBase32Secret();//new 32bithash from generator
         lines[2] = base32Secret;//set new hash in array
         write(lines);//update file
-        return TimeBasedOneTimePasswordUtil.qrImageUrl("PasswordsVault", base32Secret);//return the qr code url
+        
+        URL url = new URL(TimeBasedOneTimePasswordUtil.qrImageUrl("PasswordsVault", base32Secret));
+        return new ImageIcon(url);//return the qr code
     }
     
 }

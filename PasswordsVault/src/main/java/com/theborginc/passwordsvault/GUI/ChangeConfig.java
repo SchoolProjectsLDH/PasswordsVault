@@ -7,11 +7,7 @@ package com.theborginc.passwordsvault.GUI;
 
 import com.theborginc.passwordsvault.Auth.*;
 import java.io.IOException;
-import java.net.URL;
 import javax.crypto.Cipher;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -123,8 +119,7 @@ public class ChangeConfig extends javax.swing.JFrame {
     private void Regen2FAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Regen2FAActionPerformed
         GoogleAuthMaker twoFAMaker = new GoogleAuthMaker();//generate 2fa code object
         try {
-            URL url = new URL(twoFAMaker.newCode());
-            twoFAImage.setIcon(new ImageIcon(url)); 
+            twoFAImage.setIcon(twoFAMaker.newCode()); 
         } catch (IOException e) {
             System.out.println("Write Error");
         }
