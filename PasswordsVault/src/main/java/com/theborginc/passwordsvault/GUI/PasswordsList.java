@@ -78,6 +78,7 @@ public class PasswordsList extends javax.swing.JFrame {
         logOut = new javax.swing.JButton();
         copyAccount = new javax.swing.JButton();
         changeMasterPass = new javax.swing.JButton();
+        changeConfigs = new javax.swing.JButton();
         changeMasterUser = new javax.swing.JButton();
         TitleLabel = new javax.swing.JLabel();
         BackTitleImg = new javax.swing.JLabel();
@@ -277,6 +278,15 @@ public class PasswordsList extends javax.swing.JFrame {
         getContentPane().add(changeMasterPass);
         changeMasterPass.setBounds(550, 290, 150, 29);
 
+        changeConfigs.setText("Change Configs");
+        changeConfigs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeConfigsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(changeConfigs);
+        changeConfigs.setBounds(550, 320, 150, 29);
+
         changeMasterUser.setText("Change Master User");
         changeMasterUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -368,6 +378,13 @@ public class PasswordsList extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_DeleteAccountActionPerformed
 
+    private void changeConfigsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeConfigsActionPerformed
+        java.awt.EventQueue.invokeLater(() -> {//change configs window
+            new ChangeConfig().setVisible(true);
+        });
+        this.dispose();
+    }//GEN-LAST:event_changeConfigsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -407,6 +424,7 @@ public class PasswordsList extends javax.swing.JFrame {
     private javax.swing.JLabel Background;
     private javax.swing.JButton DeleteAccount;
     private javax.swing.JLabel TitleLabel;
+    private javax.swing.JButton changeConfigs;
     private javax.swing.JButton changeMasterPass;
     private javax.swing.JButton changeMasterUser;
     private javax.swing.JButton copyAccount;

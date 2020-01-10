@@ -5,6 +5,14 @@
  */
 package com.theborginc.passwordsvault.GUI;
 
+import com.theborginc.passwordsvault.Auth.*;
+import java.io.IOException;
+import java.net.URL;
+import javax.crypto.Cipher;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author joyceliu
@@ -29,6 +37,8 @@ public class ChangeConfig extends javax.swing.JFrame {
 
         cycleEncryptor = new javax.swing.JButton();
         Regen2FA = new javax.swing.JButton();
+        Back = new javax.swing.JButton();
+        twoFAImage = new javax.swing.JLabel();
         TitleLabel = new javax.swing.JLabel();
         BackTitleImg = new javax.swing.JLabel();
         Background = new javax.swing.JLabel();
@@ -46,14 +56,13 @@ public class ChangeConfig extends javax.swing.JFrame {
         cycleEncryptor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         cycleEncryptor.setBorderPainted(false);
         cycleEncryptor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        cycleEncryptor.setLocation(new java.awt.Point(220, 210));
         cycleEncryptor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cycleEncryptorActionPerformed(evt);
             }
         });
         getContentPane().add(cycleEncryptor);
-        cycleEncryptor.setBounds(220, 210, 200, 30);
+        cycleEncryptor.setBounds(20, 240, 200, 40);
 
         Regen2FA.setBackground(new java.awt.Color(0, 0, 0));
         Regen2FA.setForeground(new java.awt.Color(255, 255, 255));
@@ -62,14 +71,30 @@ public class ChangeConfig extends javax.swing.JFrame {
         Regen2FA.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         Regen2FA.setBorderPainted(false);
         Regen2FA.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Regen2FA.setLocation(new java.awt.Point(220, 140));
         Regen2FA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Regen2FAActionPerformed(evt);
             }
         });
         getContentPane().add(Regen2FA);
-        Regen2FA.setBounds(220, 140, 200, 30);
+        Regen2FA.setBounds(20, 130, 200, 40);
+
+        Back.setBackground(new java.awt.Color(0, 0, 0));
+        Back.setForeground(new java.awt.Color(255, 255, 255));
+        Back.setText("Back");
+        Back.setToolTipText("");
+        Back.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Back.setBorderPainted(false);
+        Back.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Back);
+        Back.setBounds(20, 360, 50, 20);
+        getContentPane().add(twoFAImage);
+        twoFAImage.setBounds(290, 110, 250, 250);
 
         TitleLabel.setBackground(new java.awt.Color(0, 102, 204));
         TitleLabel.setFont(new java.awt.Font("Silom", 1, 18)); // NOI18N
@@ -97,12 +122,9 @@ public class ChangeConfig extends javax.swing.JFrame {
 
     private void Regen2FAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Regen2FAActionPerformed
         GoogleAuthMaker twoFAMaker = new GoogleAuthMaker();//generate 2fa code object
-
         try {
-            StringSelection stringSelection = new StringSelection(twoFAMaker.newCode());//copy the new generated code to clipboard
-            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-            clipboard.setContents(stringSelection, null);
-            Regen2FA.setText("Paste To Browser");//tell user to past the qr code url to browser
+            URL url = new URL(twoFAMaker.newCode());
+            twoFAImage.setIcon(new ImageIcon(url)); 
         } catch (IOException e) {
             System.out.println("Write Error");
         }
@@ -110,6 +132,7 @@ public class ChangeConfig extends javax.swing.JFrame {
 
     private void cycleEncryptorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cycleEncryptorActionPerformed
         EncryptDecrypt editor = new EncryptDecrypt();
+        Configs CONFIG = new Configs();
         try {
             editor.encrypt(CONFIG.getSecretKey(), Cipher.DECRYPT_MODE, "./src/main/resources/passwords.txt", "./src/main/resources/passwords.json");
             CONFIG.newSecretKey();
@@ -119,6 +142,13 @@ public class ChangeConfig extends javax.swing.JFrame {
             System.out.println("Failed cycling");
         }
     }//GEN-LAST:event_cycleEncryptorActionPerformed
+
+    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
+        java.awt.EventQueue.invokeLater(() -> {//go to passwords list window
+            new PasswordsList().setVisible(true);
+        });
+        this.dispose();
+    }//GEN-LAST:event_BackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,10 +186,12 @@ public class ChangeConfig extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Back;
     private javax.swing.JLabel BackTitleImg;
     private javax.swing.JLabel Background;
     private javax.swing.JButton Regen2FA;
     private javax.swing.JLabel TitleLabel;
     private javax.swing.JButton cycleEncryptor;
+    private javax.swing.JLabel twoFAImage;
     // End of variables declaration//GEN-END:variables
 }

@@ -38,8 +38,6 @@ public class ChangePassword extends javax.swing.JFrame {
         incorrectPassLabel = new javax.swing.JLabel();
         weakLabel = new javax.swing.JLabel();
         dontMatchLabel = new javax.swing.JLabel();
-        Regen2FA = new javax.swing.JButton();
-        cycleEncryptor = new javax.swing.JButton();
         SubmitButton = new javax.swing.JButton();
         Back = new javax.swing.JButton();
         confirmLabel = new javax.swing.JLabel();
@@ -88,36 +86,6 @@ public class ChangePassword extends javax.swing.JFrame {
         dontMatchLabel.setText("Don't match!");
         getContentPane().add(dontMatchLabel);
         dontMatchLabel.setBounds(430, 240, 180, 50);
-
-        Regen2FA.setBackground(new java.awt.Color(0, 0, 0));
-        Regen2FA.setForeground(new java.awt.Color(255, 255, 255));
-        Regen2FA.setText("Regenerate 2FA Key");
-        Regen2FA.setToolTipText("");
-        Regen2FA.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        Regen2FA.setBorderPainted(false);
-        Regen2FA.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Regen2FA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Regen2FAActionPerformed(evt);
-            }
-        });
-        getContentPane().add(Regen2FA);
-        Regen2FA.setBounds(220, 320, 200, 30);
-
-        cycleEncryptor.setBackground(new java.awt.Color(0, 0, 0));
-        cycleEncryptor.setForeground(new java.awt.Color(255, 255, 255));
-        cycleEncryptor.setText("Cycle Encryptor");
-        cycleEncryptor.setToolTipText("");
-        cycleEncryptor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        cycleEncryptor.setBorderPainted(false);
-        cycleEncryptor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        cycleEncryptor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cycleEncryptorActionPerformed(evt);
-            }
-        });
-        getContentPane().add(cycleEncryptor);
-        cycleEncryptor.setBounds(220, 350, 200, 30);
 
         SubmitButton.setBackground(new java.awt.Color(0, 0, 0));
         SubmitButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -217,7 +185,7 @@ public class ChangePassword extends javax.swing.JFrame {
         Background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/securitybg.jpg"))); // NOI18N
         getContentPane().add(Background);
-        Background.setBounds(0, 0, 610, 410);
+        Background.setBounds(0, 0, 620, 420);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -270,31 +238,6 @@ public class ChangePassword extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SubmitButtonActionPerformed
 
-    private void Regen2FAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Regen2FAActionPerformed
-        GoogleAuthMaker twoFAMaker = new GoogleAuthMaker();//generate 2fa code object
-        
-        try {
-            StringSelection stringSelection = new StringSelection(twoFAMaker.newCode());//copy the new generated code to clipboard
-            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-            clipboard.setContents(stringSelection, null);
-            Regen2FA.setText("Paste To Browser");//tell user to past the qr code url to browser
-        } catch (IOException e) {
-            System.out.println("Write Error");
-        }
-    }//GEN-LAST:event_Regen2FAActionPerformed
-
-    private void cycleEncryptorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cycleEncryptorActionPerformed
-        EncryptDecrypt editor = new EncryptDecrypt();
-        try {
-            editor.encrypt(CONFIG.getSecretKey(), Cipher.DECRYPT_MODE, "./src/main/resources/passwords.txt", "./src/main/resources/passwords.json");
-            CONFIG.newSecretKey();
-            editor.encrypt(CONFIG.getSecretKey(), Cipher.ENCRYPT_MODE, "./src/main/resources/passwords.json", "./src/main/resources/passwords.txt");
-            editor.clear();
-        } catch (Exception e) {
-            System.out.println("Failed cycling");
-        }
-    }//GEN-LAST:event_cycleEncryptorActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -333,12 +276,10 @@ public class ChangePassword extends javax.swing.JFrame {
     private javax.swing.JButton Back;
     private javax.swing.JLabel BackTitleImg;
     private javax.swing.JLabel Background;
-    private javax.swing.JButton Regen2FA;
     private javax.swing.JButton SubmitButton;
     private javax.swing.JLabel TitleLabel;
     private javax.swing.JLabel confirmLabel;
     private javax.swing.JPasswordField confirmPassField;
-    private javax.swing.JButton cycleEncryptor;
     private javax.swing.JLabel dontMatchLabel;
     private javax.swing.JLabel incorrectPassLabel;
     private javax.swing.JPasswordField newPassField;
